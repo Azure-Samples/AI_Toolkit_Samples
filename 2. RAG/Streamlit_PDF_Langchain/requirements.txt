@@ -1,5 +1,5 @@
 chromadb==0.5.3
-langchain==0.2.6
+langchain==0.3.0
 langchain-community==0.2.6
 sentence-transformers
 pymupdf
