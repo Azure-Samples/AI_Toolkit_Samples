@@ -1,6 +1,10 @@
+
 # Project Name
 
 This is the companion project for A blog series on the AI toolkit. 
+
+## Join the Azure AI Community Discord 
+[![Azure AI Community Discord](https://dcbadge.vercel.app/api/server/ByRwuEEgH4)](https://discord.com/invite/ByRwuEEgH4)
 
 ## Features
 
@@ -23,6 +27,13 @@ This project framework provides the following features:
 
 1. git clone https://github.com/Azure-Samples/AI_Toolkit_RAG_Samples.git
 2. cd AI_Toolkit_RAG_Samples
+
+## AI Toolkit Updates 
+| Website          | Page Title         |
+|------------------|--------------------|
+| [Feb Update](https://techcommunity.microsoft.com/blog/azuredevcommunityblog/ai-toolkit-for-vs-code-february-update/4383280)  | AI Tookit Feb 2025 Update  |
+|    |   |
+|      |  |
 
 ## Resources
 
