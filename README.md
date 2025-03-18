@@ -61,7 +61,7 @@ This project framework provides the following features:
 |------------------|--------------------|
 | [Feb Update](https://techcommunity.microsoft.com/blog/azuredevcommunityblog/ai-toolkit-for-vs-code-february-update/4383280)  | AI Tookit Feb 2025 Update  |
 | [Jan Update](https://techcommunity.microsoft.com/blog/azuredevcommunityblog/ai-toolkit-for-vs-code-january-update/4371592)  |  AI Toolkit Jan 2025 Update |
-| [Oct Update](https://techcommunity.microsoft.com/blog/azuredevcommunityblog/ai-toolkit-for-visual-studio-code-october-2024-update-highlights/4298718)     | AI Toolkit Oct Update |
+| [Oct Update](https://techcommunity.microsoft.com/blog/azuredevcommunityblog/ai-toolkit-for-visual-studio-code-october-2024-update-highlights/4298718)     | AI Toolkit Oct 2024 Update |
 
 ## Resources
 
