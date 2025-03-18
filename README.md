@@ -8,9 +8,9 @@ This is the companion project for A blog series on the AI toolkit.
 ## AI Toolkit Blogs
 | Website          | Page Title         |
 |------------------|--------------------|
-| [Building Retrieval Augmented Generation on VSCode & AI Toolkit](https://techcommunity.microsoft.com/blog/azuredevcommunityblog/ai-toolkit-for-vs-code-february-update/4383280](https://techcommunity.microsoft.com/blog/azuredevcommunityblog/building-retrieval-augmented-generation-on-vscode--ai-toolkit/4241035)  | Building Retrieval Augmented Generation on VSCode & AI Toolkit |
+| [Building Retrieval Augmented Generation on VSCode & AI Toolkit](https://techcommunity.microsoft.com/blog/azuredevcommunityblog/building-retrieval-augmented-generation-on-vscode--ai-toolkit/4241035)  | Building Retrieval Augmented Generation on VSCode & AI Toolkit |
 | [Bring your own models](https://techcommunity.microsoft.com/blog/azuredevcommunityblog/bring-your-own-models-on-ai-toolkit---using-ollama-and-api-keys/4369411)  | Bring your own models on AI Toolkit - using Ollama and API keys |
-| [Building RAG on Phi-3 locally using embeddings on VS Code AI Toolkit](https://techcommunity.microsoft.com/blog/azuredevcommunityblog/building-rag-on-phi-3-locally-using-embeddings-on-vs-code-ai-toolkit/4246839)8)     |Building RAG on Phi-3 locally using embeddings on VS Code AI Toolkit |
+| [Building RAG on Phi-3 locally using embeddings on VS Code AI Toolkit](https://techcommunity.microsoft.com/blog/azuredevcommunityblog/building-rag-on-phi-3-locally-using-embeddings-on-vs-code-ai-toolkit/4246839) |Building RAG on Phi-3 locally using embeddings on VS Code AI Toolkit |
 
 The AI Toolkit Samples repository is a resource designed to help developers and researchers explore and implement AI solutions effectively. It typically includes:
 - Sample Code: Pre-built examples to demonstrate AI functionalities, such as training models, deploying them, or integrating them into applications.
@@ -25,7 +25,7 @@ This project framework provides the following features:
 
 * [Using VSCode AI Toolkit to run LLMs locally](https://techcommunity.microsoft.com/t5/educator-developer-blog/visual-studio-code-ai-toolkit-run-llms-locally/ba-p/4163192)
 * [VSCode AI Toolkit : Building Phi-3 GenAI Applications](https://techcommunity.microsoft.com/t5/educator-developer-blog/visual-studio-ai-toolkit-building-phi-3-genai-applications/ba-p/4179355)
-* [Building Retrieval Augmented Generation on VSCode & AI Toolkit (using ChromaDB and LangChain)](https://techcommunity.microsoft.com/t5/microsoft-developer-community/building-retrieval-augmented-generation-on-vscode-amp-ai-toolkit/ba-p/4241035)
+* [Building Retrieval Augmented Generation on VSCode & AI Toolkit] (using ChromaDB and LangChain)](https://techcommunity.microsoft.com/t5/microsoft-developer-community/building-retrieval-augmented-generation-on-vscode-amp-ai-toolkit/ba-p/4241035)
 
 ## Getting Started
 
