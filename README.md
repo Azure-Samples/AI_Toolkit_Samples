@@ -21,8 +21,8 @@ This project framework provides the following features:
 ### Quickstart
 (Add steps to get up and running quickly)
 
-1. git clone https://github.com/Azure-Samples/AI_Toolkit_RAG_Samples.git
-2. cd AI_Toolkit_RAG_Samples
+1. git clone https://github.com/Azure-Samples/AI_Toolkit_Samples.git
+2. cd AI_Toolkit_Samples
 
 ## Resources
 
