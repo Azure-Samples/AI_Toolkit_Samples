@@ -8,12 +8,15 @@ This is the companion project for A blog series on the AI toolkit.
 ## AI Toolkit Blogs
 | Website          | Page Title         |
 |------------------|--------------------|
-| [Building Retrieval Augmented Generation on VSCode & AI Toolkit](https://techcommunity.microsoft.com/blog/azuredevcommunityblog/building-retrieval-augmented-generation-on-vscode--ai-toolkit/4241035)  | Building Retrieval Augmented Generation on VSCode & AI Toolkit |
+| [Visual Studio AI Toolkit : Building Phi-3 GenAI Applications](https://techcommunity.microsoft.com/blog/educatordeveloperblog/visual-studio-ai-toolkit--building-phi-3-genai-applications/4179355)| Visual Studio AI Toolkit : Building Phi-3 GenAI Applications |
+| [Expanded model catalog for AI Toolkit](https://techcommunity.microsoft.com/blog/azuredevcommunityblog/expanded-model-catalog-for-ai-toolkit/4295917) | Expanded model catalog for AI Toolkit |
 | [Bring your own models](https://techcommunity.microsoft.com/blog/azuredevcommunityblog/bring-your-own-models-on-ai-toolkit---using-ollama-and-api-keys/4369411)  | Bring your own models on AI Toolkit - using Ollama and API keys |
+|[Prompt Engineering Simplified: AI Toolkit's Prompt Builder](https://techcommunity.microsoft.com/blog/educatordeveloperblog/prompt-engineering-simplified-ai-toolkits-prompt-builder/4384783)| Prompt Engineering Simplified: AI Toolkit's Prompt Builder |
+| [Building Retrieval Augmented Generation on VSCode & AI Toolkit](https://techcommunity.microsoft.com/blog/azuredevcommunityblog/building-retrieval-augmented-generation-on-vscode--ai-toolkit/4241035)  | Building Retrieval Augmented Generation on VSCode & AI Toolkit |
 | [Building RAG on Phi-3 locally using embeddings on VS Code AI Toolkit](https://techcommunity.microsoft.com/blog/azuredevcommunityblog/building-rag-on-phi-3-locally-using-embeddings-on-vs-code-ai-toolkit/4246839) |Building RAG on Phi-3 locally using embeddings on VS Code AI Toolkit |
 | [How Reasoning Models are transforming Logical AI thinking](https://techcommunity.microsoft.com/blog/azuredevcommunityblog/how-reasoning-models-are-transforming-logical-ai-thinking/4373194) | How Reasoning Models are transforming Logical AI thinking |
-| [Expanded model catalog for AI Toolkit](https://techcommunity.microsoft.com/blog/azuredevcommunityblog/expanded-model-catalog-for-ai-toolkit/4295917) | Expanded model catalog for AI Toolkit |
 | [Recipe Generator Application with Phi-3 Vision on AI Toolkit Locally](https://techcommunity.microsoft.com/blog/educatordeveloperblog/recipe-generator-application-with-phi-3-vision-on-ai-toolkit-locally/4366157) | Recipe Generator Application with Phi-3 Vision on AI Toolkit Locally |
+
 
 ## AI Sparks Series 
 SLMs & Local Models – Test and deploy AI models and applications efficiently on your own terms locally, to edge devices or to the cloud
