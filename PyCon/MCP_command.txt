@@ -1,0 +1,1 @@
+npx -y @modelcontextprotocol/server-filesystem /Users/<username>/<directory_location>`

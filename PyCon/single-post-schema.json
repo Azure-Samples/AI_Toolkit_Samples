@@ -1,0 +1,25 @@
+{
+  "name": "LinkedInSinglePostOutput",
+  "strict": true,
+  "schema": {
+    "type": "object",
+    "properties": {
+      "text": {
+        "type": "string"
+      },
+      "hashtags": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }  
+      }
+    },
+    "required": [
+      "text",
+      "hashtags"
+    ],
+    "additionalProperties": false
+  }
+}
+
+
