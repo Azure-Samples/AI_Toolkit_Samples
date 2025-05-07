@@ -1,0 +1,6 @@
+tools:
+  - type: bing_grounding
+    options:
+      tool_connections:
+        - >-
+          /subscriptions/<subscription_ID>/resourceGroups/<resource_group_name>/providers/Microsoft.MachineLearningServices/workspaces/<project_name>/connections/<bing grounding connection name>
