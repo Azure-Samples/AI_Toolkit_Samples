@@ -1,6 +1,6 @@
 # Evaluate Model Responses
 
-**Duration**: TBD
+**Duration**: 10 mins
 
 This demo focuses on evaluating AI model responses using the [AI Toolkit](https://aka.ms/AITookit) extension for Visual Studio Code. It demonstrates how to set up and run evaluations, create custom evaluators, and analyze results. The demo leverages the GPT-4o model as a judge for evaluations and provides step-by-step instructions for configuring evaluators, importing datasets, and reviewing evaluation outcomes.
 

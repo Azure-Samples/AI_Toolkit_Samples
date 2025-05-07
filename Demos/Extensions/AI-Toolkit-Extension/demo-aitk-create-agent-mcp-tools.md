@@ -1,6 +1,6 @@
 # Create an Agent with Tools from a MCP Server
 
-**Duration**: TBD
+**Duration**: 10 mins
 
 This demo demonstrates how to create an AI agent with tools from an MCP (Model Context Protocol) server using the [AI Toolkit](https://aka.ms/AITookit) extension for Visual Studio Code. It includes step-by-step instructions for setting up the environment, adding the GPT-4o model, configuring an MCP server, and integrating tools into the agent. The demo also covers creating system prompts, running the agent, structuring model output, and saving results to a file system.
 
