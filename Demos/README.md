@@ -25,8 +25,8 @@ Documentation for the AI Toolkit is available at [aka.ms/AITookit/doc](https://a
 
 #### Where can I find the documentation for the Azure AI Foundry extension?
 Documentation for the Azuer AI Foundry extension is available on Microsoft Learn:
-- [Work with the  Azure AI Foundry for Visual Studio Code extension](aka.ms/aif-vscode-doc)
-- [Work with Azure AI Agent Service in Visual Studio Code](aka.ms/aif-vscode-agent-doc)
+- [Work with the  Azure AI Foundry for Visual Studio Code extension](https://aka.ms/aif-vscode-doc)
+- [Work with Azure AI Agent Service in Visual Studio Code](https://aka.ms/aif-vscode-agent-doc)
 
 #### Can I use my own models or other models from Hugging Face?
 If your own model supports the OpenAI API contract, you can host it in the cloud and [add the model to AI Toolkit](https://code.visualstudio.com/docs/intelligentapps/models) as a custom model. You need to provide key information such as model endpoint URL, access key and model name.
