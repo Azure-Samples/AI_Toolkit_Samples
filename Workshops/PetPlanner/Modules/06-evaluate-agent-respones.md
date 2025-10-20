@@ -1,12 +1,6 @@
-# 🐕 Section 6: Evaluate Agent Responses
+# 🐕 Module 6: Evaluate Agent Responses
 
-## 🎯 Goal
-
-Assess your Pet Planner’s performance.
-
-## 💡 Context
-
-Evaluating responses ensures your agent meets expectations — helpful, playful, and reliable — while handling edge cases gracefully.
+Evaluating responses ensures your agent meets expectations — helpful, playful, and reliable — while handling edge cases gracefully. Your goal is to Assess your Pet Planner’s performance.
 
 ## 💬 Sample Prompt
 

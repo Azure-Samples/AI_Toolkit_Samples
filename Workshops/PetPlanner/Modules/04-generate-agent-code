@@ -1,15 +1,12 @@
-# 🐕 Section 4: Generate Agent Code
+# 🐕 Module 4: Generate Agent Code
 
-## 🎯 Goal
+You’ve used the AI Toolkit (AITK) so far to quickly prototype and test your agent’s behavior.
+Now, it’s time to move from a low-code prototype to a code-first workflow — giving you full control over your agent’s logic, structure, and integration.
 
-Connect your Pet Planner agent to an MCP (Model Context Protocol) server to access real-world* data (like weather and locations).
-
-> [!NOTE]
->We'll be using simulated "live data" for this workshop.
-
-## 💡 Context
-
-MCP servers allow agents to fetch live or contextual data securely — such as today’s weather or nearby dog parks — so your agent can plan better playdates.
+Generating agent code allows you to:
+- Extend and customize the agent’s behavior beyond the AITK UI.
+- Add features, APIs, and new data connections directly in code.
+- Collaborate through Git and version your agent like any other software project.
 
 ## 🧩 Instructions
 
@@ -20,11 +17,20 @@ MCP servers allow agents to fetch live or contextual data securely — such as t
 
 ## 🔍 What’s Happening
 
-The MCP server acts as an external data source, returning structured information your agent can use to make recommendations (e.g., "It’s sunny — perfect for a park day!").
+The AI Toolkit’s prototype definitions are now being translated into executable code.
+This marks a key transition:
+
+- The AI Toolkit was ideal for prototyping — testing logic, tuning behavior, and exploring ideas quickly.
+- The code-first workflow empowers you to develop, debug, and extend your agent using standard development practices.
+
+You now have full flexibility to:
+- Integrate APIs or additional MCP servers.
+- Add new commands and data flows.
+- Deploy or share your agent with your team.
 
 ## ✅ Checkpoint
 
-You should be able to ask the Pet Planner agent "What should my poodle and I do today in Los Angeles?" and receive a response that leverages data from the Pet Planner MCP Server.
+You should have a Pet Planner agent file (e..g `src/pet-planner-agent.python`) that runs successfully.
 
 ## 🐾 Next Step
 

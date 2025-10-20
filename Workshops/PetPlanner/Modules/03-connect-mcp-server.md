@@ -1,15 +1,9 @@
-# 🐕 Section 3: Connect an MCP Server
+# 🐕 Module 3: Connect an MCP Server
 
-## 🎯 Goal
-
-Connect your Pet Planner agent to an MCP (Model Context Protocol) server to access real-world* data (like weather and locations).
+Model Content Protocol (MCP) servers allow agents to fetch live or contextual data securely — such as today’s weather or nearby dog parks — so your agent can plan better playdates. Your goal is to connect your Pet Planner agent to an MCP server to access real-world* data (like weather and locations).
 
 > [!NOTE]
 >We'll be using simulated "live data" for this workshop.
-
-## 💡 Context
-
-MCP servers allow agents to fetch live or contextual data securely — such as today’s weather or nearby dog parks — so your agent can plan better playdates.
 
 ## 🧩 Instructions
 
