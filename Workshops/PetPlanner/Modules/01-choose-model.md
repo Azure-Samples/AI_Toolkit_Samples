@@ -1,12 +1,6 @@
-# 🐕 Section 1: Choose a Model
+# 🐕 Module 1: Choose a Model
 
-## 🎯 Goal
-
-Select and configure the right model for your Pet Planner agent.
-
-## 💡 Context
-
-The model determines how your agent thinks and responds. You’ll choose a model that can understand natural language, fetch data, and generate friendly pet playdate recommendations.
+The model determines how your agent thinks and responds. You’ll choose a model that can understand natural language, fetch data, and generate friendly pet playdate recommendations. Your goal is to select and configure the right model for your Pet Planner agent!
 
 ## 💬 Sample Prompt
 

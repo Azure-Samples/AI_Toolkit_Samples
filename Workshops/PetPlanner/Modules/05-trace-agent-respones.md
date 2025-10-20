@@ -1,12 +1,6 @@
-# 🐕 Section 5: Trace Agent Responses
+# 🐕 Module 5: Trace Agent Responses
 
-## 🎯 Goal
-
-Enable tracing to understand how your Pet Planner processes information step-by-step.
-
-## 💡 Context
-
-Tracing reveals the decision path your agent takes — which helps debug and improve its reasoning when generating suggestions.
+Tracing reveals the decision path your agent takes — which helps debug and improve its reasoning when generating suggestions. Your goal is to enable tracing to understand how your Pet Planner processes information step-by-step.
 
 ## 💬 Sample Prompt
 

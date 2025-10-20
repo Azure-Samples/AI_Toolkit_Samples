@@ -35,6 +35,6 @@ Create a **Pet Planner agent** that sniffs out the perfect playdate by checking 
 
 **Example Chat Flow**
 
-```text
-You: Plan a playdate for my corgi tomorrow.
-Pet Planner: Tomorrow looks sunny! 🐕☀️ How about a trip to Central Bark Dog Park with a frisbee and frozen treats?
+*You*: Plan a playdate for my corgi tomorrow.
+
+*Pet Planner*: Tomorrow looks sunny! 🐕☀️ How about a trip to Central Bark Dog Park with a frisbee and frozen treats?

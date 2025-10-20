@@ -1,10 +1,4 @@
-# 🐕 Section 2: Create an Agent
-
-## 🎯 Goal
-
-Build your Pet Planner agent that uses your selected model to respond to user prompts.
-
-## 💡 Context
+# 🐕 Module 2: Create an Agent
 
 Agents connect your model with logic and personality. They define how your AI interacts with users — giving it purpose, style, and reasoning. In this step, you’ll define the Pet Planner’s behavior: how it chats, fetches pet-friendly data, and offers playful suggestions to make every pet outing purr-fect!
 
