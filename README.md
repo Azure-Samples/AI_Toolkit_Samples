@@ -16,6 +16,12 @@ The AI Toolkit [samples](Samples) are designed to help developers and researcher
 - Sample Code: Pre-built examples to demonstrate AI functionalities, such as training, deploying, or integrating models into applications.
 - Documentation: Guides and tutorials to help users understand AI Toolkit features and how to use them.
 
+## Join The AI Toolkit Community 
+
+We have a dedicatd AI Toolkit Channel in our Azure AI Foundry Discord Community. Join Now at 
+
+[![Microsoft Azure AI Foundry Discord](https://dcbadge.limes.pink/api/server/ByRwuEEgH4)](https://discord.com/invite/ByRwuEEgH4)
+
 **Prequisites**
 - [Visual Studio Code](https://code.visualstudio.com/)
 - [AI Toolkit for Visual Studio Code](https://aka.ms/AIToolkit)
@@ -59,9 +65,6 @@ Join us and spark your AI transformation - view the [AI Sparks](https://www.yout
 ## Demo Resources for Presenters
 Thinking about including the AI Toolkit in a presentation? We’ve got you covered with a set of ready-to-go [demos](Demos) to help you learn and showcase both the AI Toolkit and Azure AI Foundry extensions.
 
-## Join the Azure AI Foundry Discord 
-[![Azure AI Foundry Discord](https://dcbadge.vercel.app/api/server/ByRwuEEgH4)](https://discord.com/invite/ByRwuEEgH4)
-
 ## AI Toolkit Updates 
 | Website          | Page Title         |
 |------------------|--------------------|
@@ -72,8 +75,9 @@ Thinking about including the AI Toolkit in a presentation? We’ve got you cover
 
 ## Resources
 
-* [AI Toolkit for VSCode Documentation](https://learn.microsoft.com/en-us/windows/ai/toolkit/?WT.mc_id=aiml-149848-viheg) 
-* [AI Toolkit for Visual Studio Code (Github)](https://github.com/microsoft/vscode-ai-toolkit/?WT.mc_id=aiml-149848-viheg) 
-* [RAG in AI studio (Concepts)](https://learn.microsoft.com/en-us/azure/ai-studio/concepts/retrieval-augmented-generation/?WT.mc_id=aiml-149848-viheg)
-* [RAG in AI Search](https://learn.microsoft.com/en-us/azure/search/retrieval-augmented-generation-overview/?WT.mc_id=aiml-149848-viheg)
-* [Phi-3 Cookbook](https://github.com/microsoft/Phi-3CookBook/?WT.mc_id=aiml-149848-viheg)
+* [AI Toolkit for VSCode Documentation](https://learn.microsoft.com/en-us/windows/ai/toolkit) 
+* [AI Toolkit for Visual Studio Code (Github)](https://github.com/microsoft/vscode-ai-toolkit) 
+* [RAG in AI studio (Concepts)](https://learn.microsoft.com/en-us/azure/ai-studio/concepts/retrieval-augmented-generation)
+* [RAG in AI Search](https://learn.microsoft.com/en-us/azure/search/retrieval-augmented-generation-overview)
+* [Phi-3 Cookbook](https://github.com/microsoft/Phi-3CookBook)
+* [EdgeAI for Beginners Course](https://aka.ms/edgeai-for-beginners)
