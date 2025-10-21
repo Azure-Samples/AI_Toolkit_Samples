@@ -14,10 +14,12 @@ In this hands-on session, you’ll create an intelligent agent that plans the pe
 You’ll complete five sections:
 
 1. [Choose a Model](./Modules/01-choose-model.md)  
-2. [Create an Agent](./Modules/02-create-agent.md)  
-3. [Connect an MCP Server](./Modules/03-connect-mcp-server.md)  
-4. [Trace Agent Responses](./Modules/04-trace-agent-responses.md)  
-5. [Evaluate Agent Responses](./Modules/05-evaluate-agent-responses.md)
+1. [Create an Agent](./Modules/02-create-agent.md)  
+1. [Connect an MCP Server](./Modules/03-connect-mcp-server.md)
+1. [Generate Agent Code](./Modules/04-generate-agent-code.md)
+1. [Trace Agent Responses](./Modules/05-trace-agent-responses.md)  
+1. [Evaluate Agent Responses](./Modules/06-evaluate-agent-responses.md)
+1. [Summary](./Modules/07-summary.md)
 
 ---
 
