@@ -2,16 +2,18 @@
 
 Evaluating responses ensures your agent meets expectations — helpful, playful, and reliable — while handling edge cases gracefully. Your goal is to Assess your Pet Planner’s performance.
 
-## 💬 Sample Prompt
-
-Add evaluation to my agent using the Azure AI Evaluation SDK.
-
 ## 🧩 Instructions
 
-1. TBD
-1. TBD
-1. TBD
-1. TBD
+1. Open the GitHub Copilot chat window.
+1. In the chat window, enter the **GitHub Copilot Prompt** provided below and submit.
+1. Review the response from GitHub Copilot. Given the non-deterministic nature of language models, responses will vary.
+1. If GitHub Copilot inquiries whether to create a dataset with queries and responses, respond: `Yes, only create 3 rows of data`.
+1. After GitHub Copilot completes it's task of creating a test dataset and the evaluation file, run the evaluation file in the terminal.
+1. Review the evaluation results.
+
+## 💬 GitHub Copilot Prompt
+
+Add evaluation to my agent using the Azure AI Evaluation SDK.
 
 ## 🔍 What’s Happening
 
