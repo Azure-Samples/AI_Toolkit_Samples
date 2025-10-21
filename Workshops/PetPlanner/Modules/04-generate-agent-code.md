@@ -10,10 +10,12 @@ Generating agent code allows you to:
 
 ## 🧩 Instructions
 
-1. TBD
-1. TBD
-1. TBD
-1. TBD
+1. At the bottom left of the **Agent Builder**, click **View Code**.
+1. For the **SDK** select **Microsoft Agent Framework**.
+1. For the **Programming Language** select **Python**.
+1. Save the file as `pet-planner-agent.py`.
+1. Follow the comments at the top of the `pet-planner-agent.py` file to run the code.
+1. TBD - there may be some steps here for creating a virtual environment and .env
 
 ## 🔍 What’s Happening
 
