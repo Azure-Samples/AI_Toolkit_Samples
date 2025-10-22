@@ -68,7 +68,9 @@ Thinking about including the AI Toolkit in a presentation? We’ve got you cover
 ## AI Toolkit Updates 
 | Website          | Page Title         |
 |------------------|--------------------|
-| [March Update](https://techcommunity.microsoft.com/blog/azuredevcommunityblog/ai-toolkit-for-vs-code-march-update/4396880) | AI Toolkit March 2025 Update
+| [July Update](https://techcommunity.microsoft.com/blog/azuredevcommunityblog/ai-toolkit-for-vs-code-july-update/4431548) | AI Toolkit July 2025 Update
+| [June Update](https://techcommunity.microsoft.com/blog/azuredevcommunityblog/ai-toolkit-for-vs-code-june-update/4422079) | AI Toolkit June 2025 Update
+| [March Update](https://techcommunity.microsoft.com/blog/azuredevcommunityblog/ai-toolkit-for-vs-code-march-update/4396880) | AI Toolkit March 2025 Update| [March Update](https://techcommunity.microsoft.com/blog/azuredevcommunityblog/ai-toolkit-for-vs-code-march-update/4396880) | AI Toolkit March 2025 Update
 | [Feb Update](https://techcommunity.microsoft.com/blog/azuredevcommunityblog/ai-toolkit-for-vs-code-february-update/4383280)  | AI Tookit Feb 2025 Update  |
 | [Jan Update](https://techcommunity.microsoft.com/blog/azuredevcommunityblog/ai-toolkit-for-vs-code-january-update/4371592)  |  AI Toolkit Jan 2025 Update |
 | [Oct Update](https://techcommunity.microsoft.com/blog/azuredevcommunityblog/ai-toolkit-for-visual-studio-code-october-2024-update-highlights/4298718)     | AI Toolkit Oct 2024 Update |
