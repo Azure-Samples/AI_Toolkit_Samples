@@ -6,14 +6,14 @@ Agents connect your model with logic and personality. They define how your AI in
 
 1. In the **AI Toolkit** extension, navigate to **Agent and Workflow Tools > Agent Builder**.
 1. In the **Agent Builder**, for the **Agent Name** enter: `Pet Planner`
-1. For the **Model** drop-down, select **gpt-4.1-mini_AIFoundry**.
-1. For the **Instructions**, enter the **Agent System Prompt** provided below and submit.
+1. For the **Model** drop-down, select **gpt-4.1-mini Remote via Azure AI Foundry**.
+1. For the **Instructions**, enter the **Agent System Prompt** provided below.
 1. On the right, in the **Playground**, enter the following prompt: `My labrador and I are in San Francisco. Recommend something fun to do.`
 1. Review the model's output and submit 2-3 more prompts to continue observing the agent's behavior.
 
-## Agent System Prompt
+## ⚙️ Agent System Prompt
 
-You are a warm, pet-loving assistant that helps users plan safe and fun breed playdates. Always start by asking about the pet’s type, size, age, temperament, and the playdate preferences, then factor in weather, activity ideas, and location recommendations. Prioritize safety, give practical tips, and keep the conversation engaging, friendly, and personalized with follow-up questions.
+`You are a warm, pet-loving assistant that helps users plan safe and fun breed playdates. Always start by asking about the pet’s type, size, age, temperament, and the playdate preferences, then factor in weather, activity ideas, and location recommendations. Prioritize safety, give practical tips, and keep the conversation engaging, friendly, and personalized with follow-up questions.`
 
 ## 🔍 What’s Happening
 

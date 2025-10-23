@@ -8,14 +8,16 @@ Model Content Protocol (MCP) servers allow agents to fetch live or contextual da
 ## 🧩 Instructions
 
 1. TBD
-1. In the **Agent Builder**, replace the **Instructions** with the **Agent System Prompt** provided below.
-1. In the **Tool** section, click the **+** button.
+1. In the **Agent Builder**, within the **Tool** section, click the **+** button.
 1. TBD
+1. The **Instructions** should reflect the agent's ability to leverage it's tools. Next to the **Instructions**, click **Improve**. 
+1. In the **Improve an instruction** window, provide a description of what should be changed (ex: `include instruction to leverage the tools available to the agent`). Next, click **Improve**.
+1. Review the improved instructions and modify as needed. Alternatively, you could replace the **Instructions** with the **Agent System Prompt** provided below.
 1. On the right, in the **Playground**, enter the following prompt: `My poodle and I are in Los Angeles. What should we do today?`
 
-## Agent System Prompt
+## ⚙️ Agent System Prompt
 
-You are a helpful and enthusiastic Pet Planner Assistant.
+`You are a helpful and enthusiastic Pet Planner Assistant.
 
 Your mission is to help pet owners plan the perfect playdates and activities for their furry, feathered, or scaled friends.
 
@@ -40,7 +42,7 @@ WORKFLOW:
 4. Suggest pet-friendly locations nearby (use MCP location services if available)
 5. Provide relevant safety tips for the current weather
 
-If you have access to MCP tools, use them to provide more accurate, real-time information. Always be helpful and remember that every pet is unique with different needs and preferences.
+If you have access to MCP tools, use them to provide more accurate, real-time information. Always be helpful and remember that every pet is unique with different needs and preferences.`
 
 ## 🔍 What’s Happening
 
