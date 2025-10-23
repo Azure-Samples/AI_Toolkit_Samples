@@ -4,6 +4,7 @@ You’ve used the AI Toolkit (AITK) so far to quickly prototype and test your ag
 Now, it’s time to move from a low-code prototype to a code-first workflow — giving you full control over your agent’s logic, structure, and integration.
 
 Generating agent code allows you to:
+
 - Extend and customize the agent’s behavior beyond the AITK UI.
 - Add features, APIs, and new data connections directly in code.
 - Collaborate through Git and version your agent like any other software project.
@@ -13,9 +14,9 @@ Generating agent code allows you to:
 1. At the bottom left of the **Agent Builder**, click **View Code**.
 1. For the **SDK** select **Microsoft Agent Framework**.
 1. For the **Programming Language** select **Python**.
-1. Save the file as `pet-planner-agent.py`.
-1. Follow the comments at the top of the `pet-planner-agent.py` file to run the code.
-1. TBD - there may be some steps here for creating a virtual environment and .env
+1. Save the file at the root of your project as `pet-planner-agent.py`.
+1. Before running the script, open the **terminal** and run the command `az login` to authenticate to Azure. A log-in window will appear. When prompted, select your user. Next, in the **terminal**, select your subscription.
+1. In the **terminal** run the command `python pet-planner-agent.py`.
 
 ## 🔍 What’s Happening
 
@@ -26,6 +27,7 @@ This marks a key transition:
 - The code-first workflow empowers you to develop, debug, and extend your agent using standard development practices.
 
 You now have full flexibility to:
+
 - Integrate APIs or additional MCP servers.
 - Add new commands and data flows.
 - Deploy or share your agent with your team.

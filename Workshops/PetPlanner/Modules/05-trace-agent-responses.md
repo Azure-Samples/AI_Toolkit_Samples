@@ -9,12 +9,12 @@ Tracing reveals the decision path your agent takes — which helps debug and imp
 1. Review the response from GitHub Copilot. Given the non-deterministic nature of language models, responses will vary.
 1. If GitHub Copilot requests to open the **Tracing Viewer**, respond with **Yes** OR click the provided button to access the **Tracing Viewer**. Alternatively, you can open the **AI Toolkit** extension and navigate to **Agent and Workflow Tools > Tracing**.
 1. In the **Tracing Viewer** confirm that the **Collector** has started (i.e. blue button under **Tracing**). If the **Collector** has not started, click **Start Collector**.
-1. In the **Terminal**, run the `pet-planner-agent.py` script.
+1. In the **Terminal**, run the command `python pet-planner-agent.py`.
 1. View the traces in the **Tracing Viewer**.
 
 ## 💬 GitHub Copilot Prompt
 
-Enable local tracing in my Pet Planner agent. Only export traces.
+`Enable local tracing in my Pet Planner agent. Only export traces. Use the existing uv virtual environment.`
 
 ## 🔍 What’s Happening
 
