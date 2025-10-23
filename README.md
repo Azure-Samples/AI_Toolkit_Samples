@@ -16,6 +16,12 @@ The AI Toolkit [samples](Samples) are designed to help developers and researcher
 - Sample Code: Pre-built examples to demonstrate AI functionalities, such as training, deploying, or integrating models into applications.
 - Documentation: Guides and tutorials to help users understand AI Toolkit features and how to use them.
 
+## Join The AI Toolkit Community 
+
+We have a dedicatd AI Toolkit Channel in our Azure AI Foundry Discord Community. Join Now at 
+
+[![Microsoft Azure AI Foundry Discord](https://dcbadge.limes.pink/api/server/ByRwuEEgH4)](https://discord.com/invite/ByRwuEEgH4)
+
 **Prequisites**
 - [Visual Studio Code](https://code.visualstudio.com/)
 - [AI Toolkit for Visual Studio Code](https://aka.ms/AIToolkit)
@@ -38,7 +44,7 @@ Check out the latest articles below to expand your skills and stay up to date wi
 |------------------|--------------------|
 | [Visual Studio AI Toolkit : Building Phi-3 GenAI Applications](https://techcommunity.microsoft.com/blog/educatordeveloperblog/visual-studio-ai-toolkit--building-phi-3-genai-applications/4179355)| Learn how to run pre-optimized AI models locally, test and integrate them seamlessly, and fine-tune models for specific needs. |
 | [Expanded model catalog for AI Toolkit](https://techcommunity.microsoft.com/blog/azuredevcommunityblog/expanded-model-catalog-for-ai-toolkit/4295917) | The AI Toolkit now supports a broader range of models, including those from Google, Anthropic, and GitHub, enhancing its capabilities for integrating AI into applications. |
-| [Bring your own models](https://techcommunity.microsoft.com/blog/azuredevcommunityblog/bring-your-own-models-on-ai-toolkit---using-ollama-and-api-keys/4369411)  | The AI Toolkit now supports local models via Ollama and remote models using API keys for OpenAI, Google, and Anthropic, expanding its versatility for developers. |
+| [Bring your own models](https://techcommunity.microsoft.com/blog/azuredevcommunityblog/bring-your-own-models-on-ai-toolkit---using-ollama-and-api-keys/4369411)  | The AI Toolkit now supports local models via Microsoft Foundry Local, Ollama and remote models using API keys for OpenAI, Google, and Anthropic, expanding its versatility for developers. |
 |[Prompt Engineering Simplified: AI Toolkit's Prompt Builder](https://techcommunity.microsoft.com/blog/educatordeveloperblog/prompt-engineering-simplified-ai-toolkits-prompt-builder/4384783)| The Prompt Builder in AI Toolkit simplifies the creation and refinement of prompts for large language models, enabling users to generate, test, and customize prompts efficiently. |
 | [Building Retrieval Augmented Generation on VSCode & AI Toolkit](https://techcommunity.microsoft.com/blog/azuredevcommunityblog/building-retrieval-augmented-generation-on-vscode--ai-toolkit/4241035)  | Learn how to build a Retrieval-Augmented Generation (RAG) application using VS Code and AI Toolkit. |
 | [Building RAG on Phi-3 locally using embeddings on VS Code AI Toolkit](https://techcommunity.microsoft.com/blog/azuredevcommunityblog/building-rag-on-phi-3-locally-using-embeddings-on-vs-code-ai-toolkit/4246839) |Learn how to build a Retrieval-Augmented Generation (RAG) application locally using the Phi-3 model and embeddings with the AI Toolkit. |
@@ -59,21 +65,21 @@ Join us and spark your AI transformation - view the [AI Sparks](https://www.yout
 ## Demo Resources for Presenters
 Thinking about including the AI Toolkit in a presentation? We’ve got you covered with a set of ready-to-go [demos](Demos) to help you learn and showcase both the AI Toolkit and Azure AI Foundry extensions.
 
-## Join the Azure AI Foundry Discord 
-[![Azure AI Foundry Discord](https://dcbadge.vercel.app/api/server/ByRwuEEgH4)](https://discord.com/invite/ByRwuEEgH4)
-
 ## AI Toolkit Updates 
 | Website          | Page Title         |
 |------------------|--------------------|
-| [March Update](https://techcommunity.microsoft.com/blog/azuredevcommunityblog/ai-toolkit-for-vs-code-march-update/4396880) | AI Toolkit March 2025 Update
+| [July Update](https://techcommunity.microsoft.com/blog/azuredevcommunityblog/ai-toolkit-for-vs-code-july-update/4431548) | AI Toolkit July 2025 Update
+| [June Update](https://techcommunity.microsoft.com/blog/azuredevcommunityblog/ai-toolkit-for-vs-code-june-update/4422079) | AI Toolkit June 2025 Update
+| [March Update](https://techcommunity.microsoft.com/blog/azuredevcommunityblog/ai-toolkit-for-vs-code-march-update/4396880) | AI Toolkit March 2025 Update| [March Update](https://techcommunity.microsoft.com/blog/azuredevcommunityblog/ai-toolkit-for-vs-code-march-update/4396880) | AI Toolkit March 2025 Update
 | [Feb Update](https://techcommunity.microsoft.com/blog/azuredevcommunityblog/ai-toolkit-for-vs-code-february-update/4383280)  | AI Tookit Feb 2025 Update  |
 | [Jan Update](https://techcommunity.microsoft.com/blog/azuredevcommunityblog/ai-toolkit-for-vs-code-january-update/4371592)  |  AI Toolkit Jan 2025 Update |
 | [Oct Update](https://techcommunity.microsoft.com/blog/azuredevcommunityblog/ai-toolkit-for-visual-studio-code-october-2024-update-highlights/4298718)     | AI Toolkit Oct 2024 Update |
 
 ## Resources
 
-* [AI Toolkit for VSCode Documentation](https://learn.microsoft.com/en-us/windows/ai/toolkit/?WT.mc_id=aiml-149848-viheg) 
-* [AI Toolkit for Visual Studio Code (Github)](https://github.com/microsoft/vscode-ai-toolkit/?WT.mc_id=aiml-149848-viheg) 
-* [RAG in AI studio (Concepts)](https://learn.microsoft.com/en-us/azure/ai-studio/concepts/retrieval-augmented-generation/?WT.mc_id=aiml-149848-viheg)
-* [RAG in AI Search](https://learn.microsoft.com/en-us/azure/search/retrieval-augmented-generation-overview/?WT.mc_id=aiml-149848-viheg)
-* [Phi-3 Cookbook](https://github.com/microsoft/Phi-3CookBook/?WT.mc_id=aiml-149848-viheg)
+* [AI Toolkit for VSCode Documentation](https://learn.microsoft.com/en-us/windows/ai/toolkit) 
+* [AI Toolkit for Visual Studio Code (Github)](https://github.com/microsoft/vscode-ai-toolkit) 
+* [RAG in AI studio (Concepts)](https://learn.microsoft.com/en-us/azure/ai-studio/concepts/retrieval-augmented-generation)
+* [RAG in AI Search](https://learn.microsoft.com/en-us/azure/search/retrieval-augmented-generation-overview)
+* [Phi-3 Cookbook](https://github.com/microsoft/Phi-3CookBook)
+* [EdgeAI for Beginners Course](https://aka.ms/edgeai-for-beginners)

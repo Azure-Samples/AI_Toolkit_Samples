@@ -1,6 +1,6 @@
 chromadb==0.5.3
 langchain==0.2.6
-langchain-community==0.2.6
+langchain-community==0.3.27
 sentence-transformers
 pymupdf
 openai
