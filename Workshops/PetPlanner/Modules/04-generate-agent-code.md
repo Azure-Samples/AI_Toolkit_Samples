@@ -9,14 +9,19 @@ Generating agent code allows you to:
 - Add features, APIs, and new data connections directly in code.
 - Collaborate through Git and version your agent like any other software project.
 
+> [!WARNING]
+>Do not stop the debugger. The debugger should remain running for the rest of this workshop. If the debugger is stopped, the Pet Planner MCP server will no longer run locally which prevents server access for the agent.
+
 ## 🧩 Instructions
 
 1. At the bottom left of the **Agent Builder**, click **View Code**.
 1. For the **SDK** select **Microsoft Agent Framework**.
 1. For the **Programming Language** select **Python**.
-1. Save the file at the root of your project as `pet-planner-agent.py`.
-1. Before running the script, open the **terminal** and run the command `az login` to authenticate to Azure. A log-in window will appear. When prompted, select your user. Next, in the **terminal**, select your subscription.
+1. Save the file at the root of your project as `pet-planner-agent`.
+1. Before running the script, open a new **terminal** and run the command `az login` to authenticate to Azure. A log-in window will appear. When prompted, select your user. Next, in the **terminal**, select your subscription.
+1. Next, install the **Microsoft Agent Framework (Pre-release)**. In the **terminal** run the command: `uv pip install agent-framework --pre`.
 1. In the **terminal** run the command `python pet-planner-agent.py`.
+1. Review the agent output.
 
 ## 🔍 What’s Happening
 
@@ -34,8 +39,8 @@ You now have full flexibility to:
 
 ## ✅ Checkpoint
 
-You should have a Pet Planner agent file (e..g `src/pet-planner-agent.python`) that runs successfully.
+You should have a Pet Planner agent file (i.e. `pet-planner-agent.python`) that runs successfully.
 
 ## 🐾 Next Step
 
-Continue to [Trace Agent Responses](/Workshops/PetPlanner/Modules/05-trace-agent-respones.md)
+Continue to [Trace Agent Responses](/Workshops/PetPlanner/Modules/05-trace-agent-responses.md)
