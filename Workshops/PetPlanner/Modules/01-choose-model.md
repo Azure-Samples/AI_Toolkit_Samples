@@ -34,7 +34,7 @@ GitHub Copilot calls 2 tools:
 - Get Agent Code Generation Best Practices
 
 > [!NOTE]
->If GitHub Copilot doesn't invoke the AI Toolkit tools when generating it's response, you can use the `#` symbol in the chat window to explicitly select which tool(s) you'd like GitHub Copilot to use prior to submitting your prompt.
+>If GitHub Copilot doesn't invoke the AI Toolkit tools when generating it's response, you can enter `#aitk` in the chat window to explicitly select which tool(s) you'd like GitHub Copilot to use prior to submitting your prompt.
 
 ## ✅ Checkpoint
 

@@ -7,14 +7,16 @@ Evaluating responses ensures your agent meets expectations — helpful, playful,
 1. Open the GitHub Copilot chat window.
 1. In the chat window, enter the **GitHub Copilot Prompt** provided below and submit.
 1. Review the response from GitHub Copilot. Given the non-deterministic nature of language models, responses will vary.
-1. If GitHub Copilot inquiries whether to create a dataset with queries, respond: `Yes, only create 3 rows of data. Use the existing uv virtual environment.`.
-1. If GitHub Copilot inquiries whether to create a dataset with responses, respond: `Yes, only create 3 rows of data. Use the existing uv virtual environment.`.
-1. After GitHub Copilot completes it's task of creating a test dataset and the evaluation file, run the evaluation file in the terminal.
+1. You may be prompted to allow GitHub Copilot to install any required dependencies. As a precaution, review the request before selecting **Allow**. Selecting **Allow** enables GitHub Copilot to install dependencies on your behalf.
+1. If GitHub Copilot inquiries whether to create a dataset with queries, respond: `Yes, only create 3 rows of data.`.
+1. If GitHub Copilot inquiries whether to create a dataset with responses, respond: `Yes, collect responses.`.
+1. After GitHub Copilot completes it's task of creating a test dataset, you'll be prompted to confirm the evaluation plan. Review and either respond `yes` or respond with your requested changes.
+1. After GitHub Copilot creates the evaluation file, you may be prompted to allow GitHub Copilot to run the evaluation file. If you'd prefer to run the file yourself, select **Skip**, otherwise select **Allow**.
 1. Review the evaluation results.
 
 ## 💬 GitHub Copilot Prompt
 
-`Add evaluation to my agent using the Azure AI Evaluation SDK. I don't have an existing dataset. I will need 3 rows of data created. Use the existing uv virtual environment.`
+`Add evaluation to my agent.`
 
 ## 🔍 What’s Happening
 

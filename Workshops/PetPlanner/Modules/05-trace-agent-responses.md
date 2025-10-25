@@ -14,7 +14,7 @@ Tracing reveals the decision path your agent takes — which helps debug and imp
 
 ## 💬 GitHub Copilot Prompt
 
-`Enable local tracing in my Pet Planner agent. Only export traces. Use the existing uv virtual environment.`
+`Enable local tracing in my Pet Planner agent.`
 
 ## 🔍 What’s Happening
 
@@ -30,4 +30,4 @@ You can now see a visual/textual trace of your Pet Planner’s thought process.
 
 ## 🐾 Next Step
 
-Continue to [Evaluate Agent Responses](/Workshops/PetPlanner/Modules/06-evaluate-agent-respones.md)
+Continue to [Evaluate Agent Responses](/Workshops/PetPlanner/Modules/06-evaluate-agent-responses.md)
