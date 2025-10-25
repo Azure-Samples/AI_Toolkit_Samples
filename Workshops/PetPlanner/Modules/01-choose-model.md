@@ -28,17 +28,16 @@ The model determines how your agent thinks and responds. You’ll choose a model
 
 ## 🔍 What’s Happening
 
-GitHub Copilot calls 2 tools:
+GitHub Copilot calls 1 tool:
 
 - Get AI Model Guidance
-- Get Agent Code Generation Best Practices
 
 > [!NOTE]
 >If GitHub Copilot doesn't invoke the AI Toolkit tools when generating it's response, you can enter `#aitk` in the chat window to explicitly select which tool(s) you'd like GitHub Copilot to use prior to submitting your prompt.
 
 ## ✅ Checkpoint
 
-You should now have a model recommendation for your agent and have deployed the model.
+You should now have a model recommendation for your agent and a deployed Azure AI Foundry version of the model.
 
 ## 🐾 Next Step
 
