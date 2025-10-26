@@ -24,9 +24,9 @@ Tracing reveals the decision path your agent takes — which helps debug and imp
     1. Trace details include **Chat** (with **Input + Output** and **Metadata**).,
     1. Trace details include **Execute Tool** with **Metadata**.
 
-:::image type="content" source="../Images/tracing-viewer.png" alt-text="A screenshot of the Tracing Viewer with traces successfully logged.":::
+<img src="../Images/tracing-viewer.png" alt="A screenshot of the Tracing Viewer with traces successfully logged."/>
 
-:::image type="content" source="../Images/trace-details.png" alt-text="A screenshot of a trace detail within the Tracing Viewer.":::
+<img src="../Images/trace-details.png" alt="A screenshot of a trace detail within the Tracing Viewer."/>
 
 ## 💬 GitHub Copilot Prompt
 
