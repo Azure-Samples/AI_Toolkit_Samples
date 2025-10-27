@@ -25,9 +25,12 @@ You’ll complete five sections:
 
 ## 🧰 Prerequisites
 
-- GitHub account  
-- Visual Studio Code with [GitHub Copilot Chat](https://github.com/features/copilot)
+- GitHub account with a GitHub Copilot subscription
+- Visual Studio Code with [GitHub Copilot](https://github.com/features/copilot)
 - Basic understanding of Python
+
+> [!NOTE]
+> If you don't yet have a GitHub Copilot subscription, you can use GitHub Copilot for free by signing up for the [Copilot Free plan](https://github.com/github-copilot/signup) and get a monthly limit of completions and chat interactions
 
 ---
 
