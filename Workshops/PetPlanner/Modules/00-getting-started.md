@@ -68,7 +68,7 @@ The following steps are to be completed by the admins for the GitHub Universe wo
 
 ### Open Browser Tabs
 
-1. In the browser, open: [Pet Planner MCP Server](https://github.com/Azure-Samples/AI_Toolkit_Samples/blob/main/Workshops/PetPlanner/pet-planner-server.py">AI_Toolkit_Samples/Workshops/PetPlanner/pet-planner-server.py)
+1. In the browser, open: [Pet Planner MCP Server](https://github.com/Azure-Samples/AI_Toolkit_Samples/blob/main/Workshops/PetPlanner/pet-planner-server.py)
 1. In the browser, navigate to the [Azure](https://portal.azure.com) portal.
 1. In the **Azure** portal, search for **resource groups**. Select the **ResourceGroup1** resource.
 1. In the resource group, select the **Azure AI Foundry** resource (note: starts with **ghu**).
