@@ -27,9 +27,9 @@ Evaluating responses ensures your agent meets expectations — helpful, playful,
     1. The relevance evaluator has a numeric value for each row of data.
     1. The coherence evaluator has a numeric value for each row of data.
 
-<img src="../Images/evaluation-status.png" alt="A screenshot of the terminal output for an evaluation run. There are 3 completed lines for both the relevance and coherence evaluators."/>
+![A screenshot of the terminal output for an evaluation run. There are 3 completed lines for both the relevance and coherence evaluators.](../Images/evaluation-status.png)
 
-<img src="../Images/evaluation-summary.png" alt="A screenshot of the evaluation summary for a successful evaluation run."/>
+![A screenshot of the evaluation summary for a successful evaluation run.](../Images/evaluation-summary.png)
 
 ## 💬 GitHub Copilot Prompt
 
