@@ -30,7 +30,8 @@ The following steps are to be completed by the admins for the GitHub Universe wo
 
 ### Sign-in to the GitHub Enterprise Account
 
-1. In the Skillable browser, login to the GitHub Enterprise account. When prompted, choose to stay signed-in.
+1. In the Skillable browser, navigate to the [GitHub Universe Enterprise](https://github.com/enterprises/ghuniverse) login webpage.
+1. Login to the GitHub Enterprise account. When prompted, choose to stay signed-in.
 1. In Visual Studio Code, click the **GitHub Copilot** icon (lower right) and select **Setup Copilot**.
 1. On the **Sign in to use GitHub Copilot** screen, select **Continue with GitHub**. A new browser window will open. For **Select user to authorize Visual Studio Code**, click **Continue** for the **GitHub Universe Enterprise** account.
 1. For **Authorize Visual Studio Code**, select **Authorize Visual-Studio-Code**.
