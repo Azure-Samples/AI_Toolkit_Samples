@@ -13,6 +13,7 @@ In this hands-on session, you’ll create an intelligent agent that plans the pe
 
 You’ll complete five sections:
 
+1. [Getting Started](./Modules/00-getting-started.md)
 1. [Choose a Model](./Modules/01-choose-model.md)  
 1. [Create an Agent](./Modules/02-create-agent.md)  
 1. [Connect an MCP Server](./Modules/03-connect-mcp-server.md)
