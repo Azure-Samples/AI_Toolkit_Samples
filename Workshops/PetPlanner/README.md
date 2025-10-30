@@ -27,6 +27,7 @@ You’ll complete five sections:
 
 - GitHub account with a GitHub Copilot subscription
 - Visual Studio Code with [GitHub Copilot](https://github.com/features/copilot)
+- [Azure](https://signup.azure.com/) subscription
 - Basic understanding of Python
 
 > [!NOTE]
