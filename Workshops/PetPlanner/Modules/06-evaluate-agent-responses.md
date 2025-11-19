@@ -22,7 +22,7 @@ Evaluating responses ensures your agent meets expectations — helpful, playful,
 1. After GitHub Copilot creates the evaluation file, you may be prompted to allow GitHub Copilot to run the evaluation file. If you'd prefer to run the file yourself, select **Skip**, otherwise select **Allow**.
 1. Review the evaluation results in the terminal. Alternatively, open the evaluation results JSON file (e.g. `evaluation_results.json` although yours may be named differently) and open the **Command Palette** (CTRL+SHIFT+P). Type `Format Document` to format the JSON file for a better view of the file's content. As a bonus, you can prompt GitHub Copilot to `create a markdown report of the evaluation results`.
 1. If evaluation setup is successful, select **Keep** in GitHub Copilot to keep the file changes. Evaluation setup is successful if the following conditions are met (**note**: example images are provided below):
-    1. The evaluation file created by GitHub Copilot leverages the **Azure AI Evaluation SDK**, the SDK's built-in **relevance** and **coherence** evaluators, and your Azure AI Foundry model deployment and endpoint.
+    1. The evaluation file created by GitHub Copilot leverages the **Azure AI Evaluation SDK**, the SDK's built-in **relevance** and **coherence** evaluators, and your Microsoft Foundry model deployment and endpoint.
     1. There are 3 completed lines per evaluator in the terminal output.
     1. The relevance evaluator has a numeric value for each row of data.
     1. The coherence evaluator has a numeric value for each row of data.
@@ -54,7 +54,7 @@ If the evaluation file created by GitHub Copilot produces an error, try resolvin
 `.
 - Confirm that the `model_config` variable is an instance of the `AzureOpenAIModelConfiguration` class. If the class isn't currently imported, add it to the `azure.ai.evaluation` import statement, and then update the `model_config` variable to instantiate the class.
 - Confirm that the `azure-deployment` value within the `model_config` is `gpt-4.1-mini`.
-- Confirm that the `azure_endpoint` value within the `model_config` is the same as the **Target URI** for your model deployment. You can confirm this by viewing the model deployment information in the Azure AI Foundry portal.
+- Confirm that the `azure_endpoint` value within the `model_config` is the same as the **Target URI** for your model deployment. You can confirm this by viewing the model deployment information in the Microsoft Foundry portal.
 - Confirm that the `api_version` value within the `model_config` is the same as the version provided in the **Target URI** for your model deployment (note: it's at the end of the **Target URI**).
 
 ## ✅ Checkpoint
