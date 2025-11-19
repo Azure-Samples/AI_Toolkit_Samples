@@ -18,9 +18,9 @@ The AI Toolkit [samples](Samples) are designed to help developers and researcher
 
 ## Join The AI Toolkit Community 
 
-We have a dedicatd AI Toolkit Channel in our Azure AI Foundry Discord Community. Join Now at 
+We have a dedicatd AI Toolkit Channel in our Microsoft Foundry Discord Community. Join Now at 
 
-[![Microsoft Azure AI Foundry Discord](https://dcbadge.limes.pink/api/server/ByRwuEEgH4)](https://discord.com/invite/ByRwuEEgH4)
+[![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/ByRwuEEgH4)](https://discord.com/invite/ByRwuEEgH4)
 
 **Prequisites**
 - [Visual Studio Code](https://code.visualstudio.com/)
