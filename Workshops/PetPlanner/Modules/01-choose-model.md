@@ -37,7 +37,7 @@ GitHub Copilot calls 1 tool:
 
 ## ✅ Checkpoint
 
-You should now have a model recommendation for your agent and a deployed Azure AI Foundry version of the model.
+You should now have a model recommendation for your agent and a deployed Microsoft Foundry version of the model.
 
 ## 🐾 Next Step
 
