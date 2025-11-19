@@ -1,4 +1,4 @@
-# Getting Started - PetPlanner Workshop
+# Getting Started - Pet Planner Workshop
 
 Welcome to the PetPlanner Workshop! This guide will walk you through all the setup steps needed to complete this workshop.
 
@@ -36,11 +36,11 @@ Welcome to the PetPlanner Workshop! This guide will walk you through all the set
 1. Confirm that version **0.24.1** or later is installed.
 2. If you're using an older version of the AI Toolkit extension, update to the latest version.
 
-### Create an Azure AI Foundry Project
+### Create a Microsoft Foundry Project
 
-1. Navigate to [Azure AI Foundry portal](https://ai.azure.com).
-2. If you do not have any existing Foundry projects, complete the [First Run Experience](https://learn.microsoft.com/azure/ai-foundry/quickstarts/get-started-code?tabs=azure-ai-foundry#first-run-experience) instructions. Instead of using the recommended **gpt-4o** or **gpt-4o-mini** model, search for the **gpt-4.1-mini** model and deploy. When prompted, select 80-100k TPM (Tokens Per Minute).
-3. If you have an existing Foundry project, complete the [Create a Foundry Project](https://learn.microsoft.com/azure/ai-foundry/how-to/create-projects?tabs=ai-foundry)  instructions. Deploy the **gpt-4.1-mini** model. When prompted, select 80-100k TPM (Tokens Per Minute).
+1. Navigate to the [Microsoft Foundry](https://ai.azure.com) portal.
+2. If you do not have any existing Foundry projects, complete the [Microsoft Foundry Quickstart - Create resources](https://learn.microsoft.com/azure/ai-foundry/quickstarts/get-started-code?tabs=azure-ai-foundry#first-run-experience) instructions.
+3. If you have an existing Foundry project, deploy the **gpt-4.1-mini** model using the **Default settings**.
 
 ### Sign-In to Azure
 
@@ -52,10 +52,10 @@ Welcome to the PetPlanner Workshop! This guide will walk you through all the set
 
 ### Set the Default Foundry Project in Visual Studio Code
 
-1. In Visual Studio Code, in the **Azure Resources** extension, expand your Azure subscription and expand the **Azure AI Foundry** service.
-1. Right click the Foundry project that you created for this workshop and select **Open in Azure AI Foundry Extension**. This sets the project as the default project.
+1. In Visual Studio Code, in the **Azure Resources** extension, expand your Azure subscription and expand the **Microsoft Foundry** service.
+1. Right click the Foundry project that you created for this workshop and select **Open in Micorosft Foundry Extension**. This sets the project as the default project.
 2. Open the **AI Toolkit** extension.
-3. Expand **My Resources > Models > Azure AI Foundry**.
+3. Expand **My Resources > Models > Microsoft Foundry**.
 4. Confirm that your **gpt-4.1-mini** deployment is listed.
 
 
