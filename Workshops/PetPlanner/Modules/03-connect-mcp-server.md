@@ -20,7 +20,7 @@ Model Content Protocol (MCP) servers allow agents to fetch live or contextual da
 1. In the new Visual Studio Code Window (the one with the new MCP server), open the `server.py` file (location: `src/server.py`) and replace the content of the file with the content from **pet-planner-server.py**. Save the file.
 1. Click the **Run and Debug** icon (i.e. on the left under **Source Control**). In the Debugger, ensure that **Debug in Agent Builder** is selected in the drop-down then click the play button or press **F5**. The debugger will start and the **Agent Builder** will open.
 1. You will need to select the **Pet Planner** agent for the **Agent Builder**. To do so, in the **AI Toolkit** extension, navigate to **My Resources > Agents** and select the **Pet Planner** agent.
-1. In the **Agent Builder**, ensure that the **gpt-4.1-mini Remote via Azure AI Foundry** model is selected.
+1. In the **Agent Builder**, ensure that the **gpt-4.1-mini Remote via Microsoft Foundry** model is selected.
 1. Within the **Tool** section, click the **+** button and select **MCP Server**. 
 1. Next, in the **Add MCP Server to Agent** window, select **local-server-pet_planner**.
 1. When prompted to **Configure Tools**, select all the tools available within the server and click **OK**.
