@@ -1,0 +1,46 @@
+// Calculate_trip_budget
+
+{
+  "breakdown": {
+    "flight_cost": "$540",
+    "hotel_total": "$975 (5 nights × $195/night)",
+    "daily_expenses_total": "$750 (5 days × $150/day)",
+    "subtotal_per_person": "$2265"
+  },
+  "grand_total": "$2265 for 1 traveler",
+  "budget_status": "Within budget ✅",
+  "savings_tip": "Book flights 3+ weeks ahead and use a Navigo metro pass to reduce daily costs."
+}
+
+// Check_visa_requirements
+
+{
+  "passport": "United States",
+  "destination": "France",
+  "visa_required": false,
+  "entry_type": "Visa-Free (Schengen Area)",
+  "max_stay_days": 90,
+  "requirements": [
+    "Valid passport (6+ months validity beyond travel date)",
+    "Return/onward ticket",
+    "Proof of accommodation",
+    "Sufficient funds (approx €100/day recommended)"
+  ],
+  "processing_time": "Not applicable — no visa needed",
+  "fee": "$0",
+  "tip": "US passport holders can stay up to 90 days within any 180-day period across all Schengen countries."
+}
+
+// convert_currency
+
+{
+  "original_amount": "$3000 USD",
+  "conversions": {
+    "EUR": "€2,760 (rate: 1 USD = 0.92 EUR)",
+    "JPY": "¥450,000 (rate: 1 USD = 150 JPY)",
+    "GBP": "£2,370 (rate: 1 USD = 0.79 GBP)",
+    "INR": "₹249,000 (rate: 1 USD = 83 INR)"
+  },
+  "note": "Rates are approximate. Check xe.com for live rates before travel.",
+  "tip": "Use a no-foreign-transaction-fee card (Charles Schwab, Wise) to avoid currency conversion fees abroad."
+}
