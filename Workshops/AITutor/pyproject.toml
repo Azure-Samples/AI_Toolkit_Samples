@@ -1,0 +1,6 @@
+[tool.pytest.ini_options]
+pythonpath = ["."]
+
+[tool.uvicorn]
+# Running via: uvicorn main:app  from the project root is the correct way.
+# The sys.path insert in main.py handles cases where cwd differs.
