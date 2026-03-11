@@ -1,0 +1,1232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Tutor — Microsoft Agent Framework</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ── DESIGN TOKENS ─────────────────────────────────────────────────── */
+    :root {
+      --ink:        #0e0f14;
+      --ink-muted:  #4a4d5e;
+      --page:       #f4f1eb;
+      --paper:      #faf8f4;
+      --rule:       #e0dbd0;
+
+      --teal:       #1a7a6e;
+      --teal-light: #25b09d;
+      --teal-faint: #e6f7f5;
+      --amber:      #d4860d;
+      --amber-faint:#fdf3e0;
+      --coral:      #c94e3a;
+      --coral-faint:#fdeae7;
+      --violet:     #5a3e99;
+      --violet-faint:#ede9f8;
+
+      --mono: 'JetBrains Mono', monospace;
+      --serif:'DM Serif Display', Georgia, serif;
+      --sans: 'Outfit', system-ui, sans-serif;
+
+      --radius: 12px;
+      --shadow: 0 2px 16px rgba(14,15,20,.07);
+      --shadow-lg: 0 8px 40px rgba(14,15,20,.12);
+    }
+
+    /* ── RESET ─────────────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--sans);
+      background: var(--page);
+      color: var(--ink);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    /* ── HEADER ─────────────────────────────────────────────────────────── */
+    header {
+      background: var(--ink);
+      color: #fff;
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 24px rgba(0,0,0,.35);
+    }
+    .logo {
+      display: flex; align-items: center; gap: 12px;
+    }
+    .logo-icon {
+      width: 36px; height: 36px;
+      background: linear-gradient(135deg, var(--teal-light), var(--violet));
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px;
+    }
+    .logo-text {
+      font-family: var(--serif);
+      font-size: 1.35rem;
+      letter-spacing: -0.01em;
+    }
+    .logo-text span { color: var(--teal-light); }
+
+    .header-badge {
+      font-family: var(--mono);
+      font-size: .65rem;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.15);
+      padding: 3px 10px;
+      border-radius: 20px;
+      color: rgba(255,255,255,.7);
+      letter-spacing: .06em;
+    }
+
+    /* ── NAV TABS ────────────────────────────────────────────────────────── */
+    nav {
+      background: var(--paper);
+      border-bottom: 1px solid var(--rule);
+      display: flex;
+      gap: 0;
+      padding: 0 2rem;
+      overflow-x: auto;
+    }
+    .tab {
+      font-family: var(--sans);
+      font-weight: 500;
+      font-size: .88rem;
+      color: var(--ink-muted);
+      padding: 14px 20px;
+      border: none;
+      background: none;
+      cursor: pointer;
+      border-bottom: 2.5px solid transparent;
+      transition: color .2s, border-color .2s;
+      white-space: nowrap;
+      display: flex; align-items: center; gap: 7px;
+    }
+    .tab:hover { color: var(--teal); }
+    .tab.active { color: var(--teal); border-bottom-color: var(--teal); }
+    .tab-icon { font-size: 1rem; }
+
+    /* ── MAIN LAYOUT ─────────────────────────────────────────────────────── */
+    main {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 2.5rem 2rem;
+    }
+    .section { display: none; animation: fadeIn .3s ease; }
+    .section.active { display: block; }
+
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; } }
+
+    /* ── CARDS ────────────────────────────────────────────────────────────── */
+    .card {
+      background: var(--paper);
+      border: 1px solid var(--rule);
+      border-radius: var(--radius);
+      padding: 1.75rem;
+      box-shadow: var(--shadow);
+    }
+    .card + .card { margin-top: 1.25rem; }
+
+    .card-title {
+      font-family: var(--serif);
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .card-title-icon {
+      width: 28px; height: 28px;
+      border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .9rem;
+    }
+    .icon-teal   { background: var(--teal-faint); color: var(--teal); }
+    .icon-amber  { background: var(--amber-faint); color: var(--amber); }
+    .icon-violet { background: var(--violet-faint); color: var(--violet); }
+    .icon-coral  { background: var(--coral-faint); color: var(--coral); }
+
+    /* ── GRID ─────────────────────────────────────────────────────────────── */
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+    @media (max-width: 720px) { .grid-2 { grid-template-columns: 1fr; } }
+
+    /* ── FORMS ────────────────────────────────────────────────────────────── */
+    label {
+      display: block;
+      font-size: .8rem;
+      font-weight: 600;
+      color: var(--ink-muted);
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    input[type="text"], textarea, select {
+      width: 100%;
+      background: var(--page);
+      border: 1.5px solid var(--rule);
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-family: var(--sans);
+      font-size: .93rem;
+      color: var(--ink);
+      outline: none;
+      transition: border-color .2s, box-shadow .2s;
+      resize: vertical;
+    }
+    input:focus, textarea:focus {
+      border-color: var(--teal);
+      box-shadow: 0 0 0 3px rgba(26,122,110,.12);
+    }
+    textarea { min-height: 90px; }
+
+    /* ── BUTTONS ─────────────────────────────────────────────────────────── */
+    .btn {
+      display: inline-flex; align-items: center; gap: 7px;
+      font-family: var(--sans);
+      font-weight: 600;
+      font-size: .88rem;
+      padding: 10px 20px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      transition: opacity .2s, transform .1s, box-shadow .2s;
+    }
+    .btn:hover { opacity: .88; transform: translateY(-1px); box-shadow: var(--shadow); }
+    .btn:active { transform: translateY(0); }
+    .btn:disabled { opacity: .45; cursor: not-allowed; transform: none; }
+
+    .btn-primary { background: var(--teal); color: #fff; }
+    .btn-secondary { background: var(--ink); color: #fff; }
+    .btn-outline {
+      background: transparent; color: var(--teal);
+      border: 1.5px solid var(--teal);
+    }
+    .btn-danger { background: var(--coral); color: #fff; }
+    .btn-sm { font-size: .8rem; padding: 7px 14px; }
+
+    /* ── FILE UPLOAD ─────────────────────────────────────────────────────── */
+    .upload-zone {
+      border: 2px dashed var(--rule);
+      border-radius: var(--radius);
+      padding: 2.5rem;
+      text-align: center;
+      cursor: pointer;
+      transition: border-color .2s, background .2s;
+      background: var(--page);
+    }
+    .upload-zone:hover, .upload-zone.drag-over {
+      border-color: var(--teal);
+      background: var(--teal-faint);
+    }
+    .upload-zone input { display: none; }
+    .upload-icon { font-size: 2.5rem; margin-bottom: .75rem; }
+    .upload-hint { font-size: .85rem; color: var(--ink-muted); margin-top: .5rem; }
+
+    /* ── DOCUMENT CHIPS ──────────────────────────────────────────────────── */
+    .doc-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: .75rem; }
+    .doc-chip {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--teal-faint);
+      color: var(--teal);
+      border-radius: 20px;
+      padding: 4px 12px;
+      font-size: .8rem;
+      font-weight: 500;
+    }
+
+    /* ── ANSWER BOX ──────────────────────────────────────────────────────── */
+    .answer-box {
+      background: var(--teal-faint);
+      border: 1px solid rgba(26,122,110,.2);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      margin-top: 1.25rem;
+      font-size: .93rem;
+      line-height: 1.75;
+      display: none;
+    }
+    .answer-box.visible { display: block; animation: fadeIn .3s ease; }
+    .answer-header {
+      font-family: var(--mono);
+      font-size: .7rem;
+      color: var(--teal);
+      font-weight: 500;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      margin-bottom: .6rem;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .answer-body { white-space: pre-wrap; }
+
+    /* ── EVAL FEEDBACK ───────────────────────────────────────────────────── */
+    .feedback-panel {
+      display: none;
+      animation: fadeIn .4s ease;
+      margin-top: 1.5rem;
+    }
+    .feedback-panel.visible { display: block; }
+
+    .score-ring-wrap {
+      display: flex; align-items: center; gap: 1.5rem; margin-bottom: 1.25rem;
+    }
+    .score-ring {
+      width: 80px; height: 80px;
+      border-radius: 50%;
+      background: conic-gradient(var(--teal) 0%, var(--rule) 0%);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      transition: background 1s ease;
+      box-shadow: 0 0 0 6px var(--teal-faint);
+    }
+    .score-ring-inner {
+      width: 60px; height: 60px;
+      border-radius: 50%;
+      background: var(--paper);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+    }
+    .score-num {
+      font-family: var(--serif);
+      font-size: 1.4rem;
+      line-height: 1;
+    }
+    .score-denom { font-size: .7rem; color: var(--ink-muted); }
+    .grade-badge {
+      font-family: var(--serif);
+      font-size: 1.8rem;
+      color: var(--ink);
+    }
+    .grade-sub { font-size: .85rem; color: var(--ink-muted); }
+
+    .feedback-section { margin-top: 1rem; }
+    .feedback-section h4 {
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      margin-bottom: .5rem;
+    }
+    .feedback-list { list-style: none; }
+    .feedback-list li {
+      padding: 6px 0;
+      font-size: .9rem;
+      display: flex; align-items: flex-start; gap: 8px;
+    }
+    .feedback-list li::before {
+      flex-shrink: 0;
+      width: 18px; height: 18px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .65rem; font-weight: 700;
+    }
+    .strength-list li::before { content: "✓"; background: var(--teal-faint); color: var(--teal); }
+    .improve-list li::before  { content: "!"; background: var(--amber-faint); color: var(--amber); }
+
+    .hint-box {
+      background: var(--violet-faint);
+      border-left: 3px solid var(--violet);
+      border-radius: 0 8px 8px 0;
+      padding: .75rem 1rem;
+      font-size: .88rem;
+      margin-top: .75rem;
+    }
+    .hint-label {
+      font-size: .7rem; font-weight: 700; letter-spacing: .08em;
+      text-transform: uppercase; color: var(--violet); margin-bottom: 3px;
+    }
+
+    /* ── TELEMETRY PANEL ─────────────────────────────────────────────────── */
+    .telem-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    @media (max-width: 840px) { .telem-grid { grid-template-columns: repeat(2, 1fr); } }
+
+    .stat-card {
+      background: var(--paper);
+      border: 1px solid var(--rule);
+      border-radius: var(--radius);
+      padding: 1.1rem 1.25rem;
+      box-shadow: var(--shadow);
+    }
+    .stat-label {
+      font-size: .72rem; font-weight: 700; letter-spacing: .07em;
+      text-transform: uppercase; color: var(--ink-muted); margin-bottom: 6px;
+    }
+    .stat-value {
+      font-family: var(--serif);
+      font-size: 1.8rem;
+      line-height: 1;
+    }
+    .stat-unit { font-size: .75rem; color: var(--ink-muted); margin-top: 3px; }
+
+    .trace-feed {
+      max-height: 400px;
+      overflow-y: auto;
+      display: flex; flex-direction: column; gap: 6px;
+    }
+    .trace-item {
+      display: grid;
+      grid-template-columns: 70px 150px 1fr;
+      gap: 8px;
+      align-items: start;
+      padding: 8px 10px;
+      border-radius: 8px;
+      font-family: var(--mono);
+      font-size: .72rem;
+      background: var(--page);
+      border: 1px solid var(--rule);
+      animation: fadeIn .3s ease;
+    }
+    .trace-time { color: var(--ink-muted); }
+    .trace-type {
+      padding: 2px 8px; border-radius: 4px;
+      font-weight: 500; font-size: .68rem; letter-spacing: .04em;
+      width: fit-content;
+    }
+    .type-RAG_QUERY_DONE  { background: var(--teal-faint); color: var(--teal); }
+    .type-RAG_INGEST      { background: var(--teal-faint); color: var(--teal); }
+    .type-EVAL_DONE       { background: var(--violet-faint); color: var(--violet); }
+    .type-RAG_QUERY_START { background: var(--amber-faint); color: var(--amber); }
+    .type-EVAL_START      { background: var(--amber-faint); color: var(--amber); }
+    .type-RAG_QUERY_ERROR, .type-EVAL_ERROR { background: var(--coral-faint); color: var(--coral); }
+    .type-RAG_CLEAR       { background: #f3f3f3; color: #666; }
+    .trace-data { color: var(--ink-muted); white-space: pre-wrap; word-break: break-all; }
+
+    /* ── LOADING ─────────────────────────────────────────────────────────── */
+    .spinner {
+      display: inline-block;
+      width: 14px; height: 14px;
+      border: 2px solid currentColor;
+      border-top-color: transparent;
+      border-radius: 50%;
+      animation: spin .6s linear infinite;
+      opacity: .7;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .loading-bar {
+      height: 3px;
+      border-radius: 2px;
+      background: var(--rule);
+      overflow: hidden;
+      margin-top: .75rem;
+      display: none;
+    }
+    .loading-bar.active { display: block; }
+    .loading-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--teal), var(--teal-light));
+      border-radius: 2px;
+      animation: loading 1.2s ease-in-out infinite;
+    }
+    @keyframes loading {
+      0%   { width: 0%; margin-left: 0%; }
+      50%  { width: 70%; margin-left: 15%; }
+      100% { width: 0%; margin-left: 100%; }
+    }
+
+    /* ── STATUS PILL ─────────────────────────────────────────────────────── */
+    .status-pill {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: .75rem; font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-left: auto;
+    }
+    .pill-ok  { background: var(--teal-faint); color: var(--teal); }
+    .pill-err { background: var(--coral-faint); color: var(--coral); }
+    .pill-warn{ background: var(--amber-faint); color: var(--amber); }
+    .pill-dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+
+    /* ── Q&A FORM LAYOUT ─────────────────────────────────────────────────── */
+    .qa-form { display: flex; flex-direction: column; gap: 1rem; }
+    .form-row { display: flex; flex-direction: column; gap: 6px; }
+
+    /* ── FOOTER ──────────────────────────────────────────────────────────── */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: .78rem;
+      color: var(--ink-muted);
+      border-top: 1px solid var(--rule);
+      margin-top: 3rem;
+    }
+    footer strong { color: var(--ink); }
+
+    /* ── PAGE HERO ───────────────────────────────────────────────────────── */
+    .hero {
+      background: linear-gradient(135deg, var(--ink) 0%, #1e1f2b 100%);
+      color: #fff;
+      border-radius: var(--radius);
+      padding: 2.5rem;
+      margin-bottom: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      right: -60px; top: -60px;
+      width: 280px; height: 280px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(37,176,157,.25) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-label {
+      font-family: var(--mono);
+      font-size: .68rem;
+      color: var(--teal-light);
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      margin-bottom: .6rem;
+    }
+    .hero h1 {
+      font-family: var(--serif);
+      font-size: 2rem;
+      line-height: 1.2;
+      margin-bottom: .6rem;
+    }
+    .hero p {
+      color: rgba(255,255,255,.6);
+      font-size: .92rem;
+      max-width: 560px;
+    }
+    .hero-tags {
+      display: flex; flex-wrap: wrap; gap: 8px;
+      margin-top: 1.25rem;
+    }
+    .hero-tag {
+      font-size: .72rem;
+      padding: 4px 12px;
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,.15);
+      color: rgba(255,255,255,.7);
+      font-family: var(--mono);
+    }
+
+    /* ── SCROLLBAR ───────────────────────────────────────────────────────── */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--rule); border-radius: 3px; }
+  </style>
+</head>
+<body>
+
+<!-- ── HEADER ─────────────────────────────────────────────────────────── -->
+<header>
+  <div class="logo">
+    <div class="logo-icon">🎓</div>
+    <div class="logo-text">AI <span>Tutor</span></div>
+  </div>
+  <div style="display:flex; align-items:center; gap:10px;">
+    <div id="providerBadge" class="header-badge" title="Active model provider" style="cursor:pointer;" onclick="toggleProviderPanel()">
+      ◉ Loading…
+    </div>
+    <div id="backendStatus" class="header-badge">⬤ Connecting…</div>
+  </div>
+</header>
+
+<!-- ── PROVIDER SWITCHER PANEL ─────────────────────────────────────────── -->
+<div id="providerPanel" style="
+  display:none; position:fixed; top:64px; right:12px; z-index:200;
+  background:var(--ink); color:#fff; border-radius:var(--radius);
+  padding:1.25rem; box-shadow:var(--shadow-lg); min-width:300px;
+  animation:fadeIn .2s ease;
+">
+  <div style="font-family:var(--serif); font-size:1rem; margin-bottom:.75rem; border-bottom:1px solid rgba(255,255,255,.1); padding-bottom:.6rem;">
+    Switch Model Provider
+  </div>
+  <div id="providerList" style="display:flex; flex-direction:column; gap:6px;"></div>
+  <div style="margin-top:.75rem; font-size:.7rem; color:rgba(255,255,255,.35); font-family:var(--mono); line-height:1.5;">
+    Runtime switch — edit .env to persist across restarts
+  </div>
+</div>
+
+<!-- ── NAV TABS ──────────────────────────────────────────────────────────── -->
+<nav>
+  <button class="tab active" data-tab="rag">
+    <span class="tab-icon">📚</span> RAG Knowledge Base
+  </button>
+  <button class="tab" data-tab="qa">
+    <span class="tab-icon">✏️</span> Q&amp;A Evaluator
+  </button>
+  <button class="tab" data-tab="telemetry">
+    <span class="tab-icon">📡</span> Observability
+  </button>
+</nav>
+
+<!-- ── MAIN ──────────────────────────────────────────────────────────────── -->
+<main>
+
+  <!-- ═══════════════════════ RAG SECTION ════════════════════════════════ -->
+  <section id="rag" class="section active">
+
+    <div class="hero">
+      <div class="hero-label">RAG · Retrieval-Augmented Generation</div>
+      <h1>Query Your Documents</h1>
+      <p>Upload study materials and ask questions answered <em>exclusively</em> from your knowledge base — no hallucinations, full citations.</p>
+      <div class="hero-tags">
+        <span class="hero-tag">agent_framework.Agent</span>
+        <span class="hero-tag">ChromaDB</span>
+        <span class="hero-tag">@tool search_documents</span>
+        <span class="hero-tag">OTel rag.retrieve span</span>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <!-- Upload -->
+      <div class="card">
+        <div class="card-title">
+          <div class="card-title-icon icon-amber">📤</div>
+          Upload Documents
+        </div>
+
+        <div class="upload-zone" id="uploadZone">
+          <input type="file" id="fileInput" accept=".txt,.pdf,.md" multiple />
+          <div class="upload-icon">📄</div>
+          <div><strong>Drag &amp; drop</strong> or click to browse</div>
+          <div class="upload-hint">Supports .txt, .pdf, .md</div>
+        </div>
+
+        <div class="loading-bar" id="uploadBar"><div class="loading-bar-fill"></div></div>
+
+        <div id="docList" class="doc-list"></div>
+
+        <div style="margin-top:1rem; display:flex; gap:8px; flex-wrap:wrap;">
+          <button class="btn btn-primary btn-sm" onclick="triggerUpload()">
+            ⬆ Upload File
+          </button>
+          <button class="btn btn-outline btn-sm" onclick="loadDocuments()">
+            ↺ Refresh
+          </button>
+          <button class="btn btn-danger btn-sm" onclick="clearDocuments()">
+            🗑 Clear All
+          </button>
+        </div>
+      </div>
+
+      <!-- Query -->
+      <div class="card">
+        <div class="card-title">
+          <div class="card-title-icon icon-teal">💬</div>
+          Ask a Question
+        </div>
+
+        <div class="form-row">
+          <label for="ragQuestion">Your Question</label>
+          <textarea id="ragQuestion" rows="3" placeholder="e.g. Explain the main concepts covered in the uploaded notes…"></textarea>
+        </div>
+
+        <div style="margin-top:.75rem; display:flex; align-items:center; gap:10px;">
+          <button class="btn btn-primary" id="askBtn" onclick="askRag()">
+            Ask Tutor
+          </button>
+          <div class="loading-bar" id="ragBar" style="flex:1; margin-top:0;"><div class="loading-bar-fill"></div></div>
+        </div>
+
+        <div class="answer-box" id="answerBox">
+          <div class="answer-header">
+            <span>🤖 RagTutorAgent · Microsoft Agent Framework</span>
+            <span id="ragLatency" style="font-size:.65rem; color:var(--ink-muted);"></span>
+          </div>
+          <div class="answer-body" id="answerText"></div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ═══════════════════════ Q&A SECTION ════════════════════════════════ -->
+  <section id="qa" class="section">
+
+    <div class="hero">
+      <div class="hero-label">Evaluation · EvaluatorAgent</div>
+      <h1>Test Your Knowledge</h1>
+      <p>Write your answer, then let the AI Evaluator grade it using a structured rubric — with actionable feedback and hints.</p>
+      <div class="hero-tags">
+        <span class="hero-tag">agent_framework.Agent</span>
+        <span class="hero-tag">@tool fetch_rubric</span>
+        <span class="hero-tag">OTel ai_tutor.evaluate_answer span</span>
+        <span class="hero-tag">Structured JSON output</span>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <!-- Form -->
+      <div class="card">
+        <div class="card-title">
+          <div class="card-title-icon icon-violet">✍️</div>
+          Your Answer
+        </div>
+
+        <div class="qa-form">
+          <div class="form-row">
+            <label for="qaQuestion">Question / Prompt</label>
+            <textarea id="qaQuestion" rows="2" placeholder="e.g. What is the difference between supervised and unsupervised learning?"></textarea>
+          </div>
+          <div class="form-row">
+            <label for="qaTopic">Topic (optional)</label>
+            <input type="text" id="qaTopic" placeholder="e.g. Machine Learning, Algorithms…" />
+          </div>
+          <div class="form-row">
+            <label for="qaAnswer">Your Answer</label>
+            <textarea id="qaAnswer" rows="5" placeholder="Write your answer here in as much detail as you can…"></textarea>
+          </div>
+
+          <div style="display:flex; align-items:center; gap:10px;">
+            <button class="btn btn-secondary" id="evalBtn" onclick="submitEval()">
+              🎯 Evaluate Answer
+            </button>
+            <button class="btn btn-outline btn-sm" onclick="loadSample()">
+              Load Sample
+            </button>
+          </div>
+          <div class="loading-bar" id="evalBar"><div class="loading-bar-fill"></div></div>
+        </div>
+      </div>
+
+      <!-- Feedback -->
+      <div>
+        <div class="card" id="feedbackCard" style="min-height:200px;">
+          <div class="card-title">
+            <div class="card-title-icon icon-coral">📋</div>
+            Evaluation Feedback
+          </div>
+
+          <div id="feedbackPlaceholder" style="color:var(--ink-muted); font-size:.9rem; padding: 2rem 0; text-align:center;">
+            Submit your answer to receive detailed feedback.
+          </div>
+
+          <div class="feedback-panel" id="feedbackPanel">
+            <div class="score-ring-wrap">
+              <div class="score-ring" id="scoreRing">
+                <div class="score-ring-inner">
+                  <div class="score-num" id="scoreNum">—</div>
+                  <div class="score-denom">/10</div>
+                </div>
+              </div>
+              <div>
+                <div class="grade-badge" id="gradeBadge">—</div>
+                <div class="grade-sub" id="gradeLabel">Awaiting evaluation</div>
+              </div>
+            </div>
+
+            <div class="feedback-section">
+              <h4>✅ Strengths</h4>
+              <ul class="feedback-list strength-list" id="strengthsList"></ul>
+            </div>
+
+            <div class="feedback-section">
+              <h4>⚠ Areas for Improvement</h4>
+              <ul class="feedback-list improve-list" id="improveList"></ul>
+            </div>
+
+            <div class="feedback-section">
+              <h4>📝 Detailed Feedback</h4>
+              <p id="detailedFeedback" style="font-size:.9rem; line-height:1.75;"></p>
+            </div>
+
+            <div class="hint-box" id="hintBox" style="display:none;">
+              <div class="hint-label">💡 Tutor Hint</div>
+              <div id="hintText"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ══════════════════ TELEMETRY / OBSERVABILITY SECTION ═══════════════ -->
+  <section id="telemetry" class="section">
+
+    <div class="hero">
+      <div class="hero-label">OpenTelemetry · Observability</div>
+      <h1>Real-Time Agent Monitoring</h1>
+      <p>Full lifecycle tracing of agent interactions — from initial prompt to final response — with span-level visibility into every LLM call and tool invocation.</p>
+      <div class="hero-tags">
+        <span class="hero-tag">OTel GenAI Semantic Conventions</span>
+        <span class="hero-tag">invoke_agent span</span>
+        <span class="hero-tag">chat span</span>
+        <span class="hero-tag">execute_tool span</span>
+        <span class="hero-tag">OTLP export</span>
+      </div>
+    </div>
+
+    <!-- Metrics row -->
+    <div class="telem-grid" id="metricsGrid">
+      <div class="stat-card">
+        <div class="stat-label">RAG Queries</div>
+        <div class="stat-value" id="mRagQueries">—</div>
+        <div class="stat-unit">total requests</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Avg RAG Latency</div>
+        <div class="stat-value" id="mRagLatency">—</div>
+        <div class="stat-unit">milliseconds</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Evaluations</div>
+        <div class="stat-value" id="mEvalQueries">—</div>
+        <div class="stat-unit">answers scored</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Avg Eval Latency</div>
+        <div class="stat-value" id="mEvalLatency">—</div>
+        <div class="stat-unit">milliseconds</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title" style="margin-bottom:.75rem;">
+        <div class="card-title-icon icon-teal">📡</div>
+        Live Trace Feed
+        <button class="btn btn-outline btn-sm" style="margin-left:auto;" onclick="refreshTelemetry()">
+          ↺ Refresh
+        </button>
+      </div>
+
+      <div style="font-family:var(--mono); font-size:.72rem; color:var(--ink-muted); margin-bottom:.75rem; display:flex; gap:16px; align-items:center;">
+        <span>Each row = 1 trace event emitted by the agent pipeline</span>
+        <span id="traceCount"></span>
+      </div>
+
+      <div class="trace-feed" id="traceFeed">
+        <div style="text-align:center; padding: 2rem; color:var(--ink-muted); font-size:.88rem;">
+          No traces yet — interact with the RAG or Q&A tabs.
+        </div>
+      </div>
+    </div>
+
+    <!-- OTel architecture explanation -->
+    <div class="card" style="margin-top:1.25rem;">
+      <div class="card-title">
+        <div class="card-title-icon icon-violet">🏗️</div>
+        Observability Architecture
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; margin-top:.5rem;">
+        <div style="padding:.75rem; background:var(--page); border-radius:8px; border:1px solid var(--rule);">
+          <div style="font-weight:700; font-size:.85rem; margin-bottom:.4rem; color:var(--teal);">Microsoft Agent Framework</div>
+          <div style="font-size:.8rem; color:var(--ink-muted); line-height:1.6;">
+            Auto-emits <code>invoke_agent</code>, <code>chat</code>, <code>execute_tool</code> spans per OTel GenAI semantic conventions.
+          </div>
+        </div>
+        <div style="padding:.75rem; background:var(--page); border-radius:8px; border:1px solid var(--rule);">
+          <div style="font-weight:700; font-size:.85rem; margin-bottom:.4rem; color:var(--amber);">Custom App Spans</div>
+          <div style="font-size:.8rem; color:var(--ink-muted); line-height:1.6;">
+            <code>rag.retrieve</code>, <code>rag.ingest</code>, <code>ai_tutor.rag_query</code>, <code>ai_tutor.evaluate_answer</code> — business-level context.
+          </div>
+        </div>
+        <div style="padding:.75rem; background:var(--page); border-radius:8px; border:1px solid var(--rule);">
+          <div style="font-weight:700; font-size:.85rem; margin-bottom:.4rem; color:var(--violet);">OTLP Export Targets</div>
+          <div style="font-size:.8rem; color:var(--ink-muted); line-height:1.6;">
+            Console (dev), Jaeger, VS Code AI Toolkit, Aspire Dashboard, Azure Application Insights.
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+</main>
+
+<footer>
+  Built with <strong>Microsoft Agent Framework RC</strong> · <strong>FastAPI</strong> · <strong>OpenTelemetry</strong> · <strong>ChromaDB</strong>
+</footer>
+
+<!-- ── JAVASCRIPT ─────────────────────────────────────────────────────── -->
+<script>
+  const API = 'http://localhost:8000';
+
+  // ── Tab routing ────────────────────────────────────────────────────────
+  document.querySelectorAll('.tab').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(btn.dataset.tab).classList.add('active');
+      if (btn.dataset.tab === 'telemetry') refreshTelemetry();
+    });
+  });
+
+  // ── Health check ───────────────────────────────────────────────────────
+  async function checkHealth() {
+    const pill = document.getElementById('backendStatus');
+    try {
+      const r = await fetch(`${API}/health`, { signal: AbortSignal.timeout(4000) });
+      if (r.ok) {
+        pill.textContent = '⬤ Backend online';
+        pill.style.background = 'rgba(37,176,157,.15)';
+        pill.style.color = '#25b09d';
+        pill.style.border = '1px solid rgba(37,176,157,.3)';
+        loadDocuments();
+      } else throw new Error('not ok');
+    } catch {
+      pill.textContent = '⬤ Backend offline';
+      pill.style.background = 'rgba(201,78,58,.15)';
+      pill.style.color = '#c94e3a';
+      pill.style.border = '1px solid rgba(201,78,58,.3)';
+    }
+  }
+
+  // ── Upload ─────────────────────────────────────────────────────────────
+  function triggerUpload() {
+    document.getElementById('fileInput').click();
+  }
+
+  document.getElementById('fileInput').addEventListener('change', async e => {
+    const files = [...e.target.files];
+    if (!files.length) return;
+    const bar = document.getElementById('uploadBar');
+    bar.classList.add('active');
+    for (const file of files) {
+      const fd = new FormData();
+      fd.append('file', file);
+      try {
+        const r = await fetch(`${API}/api/rag/upload`, { method: 'POST', body: fd });
+        if (!r.ok) throw new Error(await r.text());
+        const data = await r.json();
+        showToast(`✅ Ingested "${data.filename}" — ${data.chunks} chunks`);
+      } catch (err) {
+        showToast(`❌ Upload failed: ${err.message}`, 'error');
+      }
+    }
+    bar.classList.remove('active');
+    e.target.value = '';
+    loadDocuments();
+  });
+
+  // Drag & drop
+  const zone = document.getElementById('uploadZone');
+  zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('drag-over'); });
+  zone.addEventListener('dragleave', () => zone.classList.remove('drag-over'));
+  zone.addEventListener('drop', e => {
+    e.preventDefault();
+    zone.classList.remove('drag-over');
+    const dt = new DataTransfer();
+    [...e.dataTransfer.files].forEach(f => dt.items.add(f));
+    document.getElementById('fileInput').files = dt.files;
+    document.getElementById('fileInput').dispatchEvent(new Event('change'));
+  });
+  zone.addEventListener('click', () => document.getElementById('fileInput').click());
+
+  async function loadDocuments() {
+    try {
+      const r = await fetch(`${API}/api/rag/documents`);
+      const data = await r.json();
+      const list = document.getElementById('docList');
+      if (!data.documents.length) {
+        list.innerHTML = '<span style="font-size:.82rem;color:var(--ink-muted);">No documents yet.</span>';
+        return;
+      }
+      list.innerHTML = data.documents
+        .map(d => `<span class="doc-chip">📄 ${d}</span>`)
+        .join('');
+    } catch { /* offline */ }
+  }
+
+  async function clearDocuments() {
+    if (!confirm('Clear all documents from the knowledge base?')) return;
+    await fetch(`${API}/api/rag/clear`, { method: 'DELETE' });
+    showToast('🗑 Knowledge base cleared.');
+    loadDocuments();
+  }
+
+  // ── RAG query ──────────────────────────────────────────────────────────
+  async function askRag() {
+    const q = document.getElementById('ragQuestion').value.trim();
+    if (!q) return;
+
+    const btn = document.getElementById('askBtn');
+    const bar = document.getElementById('ragBar');
+    const box = document.getElementById('answerBox');
+
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spinner"></span> Thinking…';
+    bar.classList.add('active');
+    box.classList.remove('visible');
+
+    try {
+      const r = await fetch(`${API}/api/rag/query`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ question: q }),
+      });
+      if (!r.ok) throw new Error((await r.json()).detail || 'Error');
+      const data = await r.json();
+
+      document.getElementById('answerText').textContent = data.answer;
+      document.getElementById('ragLatency').textContent = `⏱ ${data.latency_ms} ms`;
+      box.classList.add('visible');
+    } catch (err) {
+      showToast(`❌ ${err.message}`, 'error');
+    } finally {
+      btn.disabled = false;
+      btn.innerHTML = 'Ask Tutor';
+      bar.classList.remove('active');
+    }
+  }
+
+  document.getElementById('ragQuestion').addEventListener('keydown', e => {
+    if (e.key === 'Enter' && e.ctrlKey) askRag();
+  });
+
+  // ── Evaluation ─────────────────────────────────────────────────────────
+  function loadSample() {
+    document.getElementById('qaQuestion').value =
+      'Explain the concept of gradient descent in machine learning and describe when it might fail to converge.';
+    document.getElementById('qaTopic').value = 'Machine Learning';
+    document.getElementById('qaAnswer').value =
+      'Gradient descent is an optimization algorithm that iteratively moves in the direction of steepest descent of a loss function to find a minimum. It updates parameters by subtracting the gradient multiplied by a learning rate. It may fail to converge if the learning rate is too high causing oscillation, or if the loss landscape has many saddle points. Vanishing gradients in deep networks can also prevent convergence.';
+  }
+
+  async function submitEval() {
+    const question = document.getElementById('qaQuestion').value.trim();
+    const answer   = document.getElementById('qaAnswer').value.trim();
+    const topic    = document.getElementById('qaTopic').value.trim();
+
+    if (!question) { showToast('Please enter a question.', 'warn'); return; }
+
+    const btn = document.getElementById('evalBtn');
+    const bar = document.getElementById('evalBar');
+    const panel = document.getElementById('feedbackPanel');
+    const ph = document.getElementById('feedbackPlaceholder');
+
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spinner"></span> Evaluating…';
+    bar.classList.add('active');
+    panel.classList.remove('visible');
+    ph.style.display = 'block';
+
+    try {
+      const r = await fetch(`${API}/api/eval/submit`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ question, student_answer: answer, topic }),
+      });
+      if (!r.ok) throw new Error((await r.json()).detail || 'Error');
+      const data = await r.json();
+
+      renderFeedback(data);
+      ph.style.display = 'none';
+      panel.classList.add('visible');
+    } catch (err) {
+      showToast(`❌ ${err.message}`, 'error');
+    } finally {
+      btn.disabled = false;
+      btn.innerHTML = '🎯 Evaluate Answer';
+      bar.classList.remove('active');
+    }
+  }
+
+  function renderFeedback(data) {
+    const score = data.score ?? 0;
+    const pct = (score / 10) * 100;
+
+    // Score ring
+    const ring = document.getElementById('scoreRing');
+    ring.style.background =
+      `conic-gradient(var(--teal) ${pct}%, var(--rule) ${pct}%)`;
+    document.getElementById('scoreNum').textContent = score;
+
+    // Grade + label
+    const grade = data.grade || '—';
+    document.getElementById('gradeBadge').textContent = grade;
+    const labels = { A: 'Excellent', B: 'Good', C: 'Satisfactory', D: 'Needs Work', F: 'Insufficient' };
+    document.getElementById('gradeLabel').textContent = labels[grade] || grade;
+
+    // Strengths
+    const sl = document.getElementById('strengthsList');
+    sl.innerHTML = (data.strengths || []).map(s => `<li>${s}</li>`).join('') ||
+      '<li style="color:var(--ink-muted);">None identified.</li>';
+
+    // Improvements
+    const il = document.getElementById('improveList');
+    il.innerHTML = (data.improvements || []).map(i => `<li>${i}</li>`).join('') ||
+      '<li style="color:var(--ink-muted);">None — great work!</li>';
+
+    // Detailed feedback
+    document.getElementById('detailedFeedback').textContent = data.detailed_feedback || '—';
+
+    // Hint
+    const hintBox = document.getElementById('hintBox');
+    if (data.hint) {
+      document.getElementById('hintText').textContent = data.hint;
+      hintBox.style.display = 'block';
+    } else {
+      hintBox.style.display = 'none';
+    }
+  }
+
+  // ── Telemetry ──────────────────────────────────────────────────────────
+  async function refreshTelemetry() {
+    try {
+      const [mR, tR] = await Promise.all([
+        fetch(`${API}/api/telemetry/metrics`).then(r => r.json()),
+        fetch(`${API}/api/telemetry/traces?limit=80`).then(r => r.json()),
+      ]);
+
+      document.getElementById('mRagQueries').textContent = mR.rag_queries ?? '—';
+      document.getElementById('mRagLatency').textContent = mR.avg_rag_latency_ms ? `${mR.avg_rag_latency_ms}` : '—';
+      document.getElementById('mEvalQueries').textContent = mR.eval_queries ?? '—';
+      document.getElementById('mEvalLatency').textContent = mR.avg_eval_latency_ms ? `${mR.avg_eval_latency_ms}` : '—';
+
+      const feed = document.getElementById('traceFeed');
+      if (!tR.traces.length) {
+        feed.innerHTML = `<div style="text-align:center;padding:2rem;color:var(--ink-muted);font-size:.88rem;">No traces yet — interact with the RAG or Q&A tabs.</div>`;
+        return;
+      }
+      document.getElementById('traceCount').textContent = `${tR.total} total events`;
+
+      feed.innerHTML = tR.traces.map(t => {
+        const { timestamp, type, ...rest } = t;
+        const safeType = (type || 'UNKNOWN').replace(/[^A-Z_]/g, '');
+        return `
+          <div class="trace-item">
+            <span class="trace-time">${timestamp}</span>
+            <span class="trace-type type-${safeType}">${type}</span>
+            <span class="trace-data">${JSON.stringify(rest, null, 0)}</span>
+          </div>`;
+      }).join('');
+    } catch (err) {
+      console.warn('Telemetry fetch failed:', err);
+    }
+  }
+
+  // ── Toast ──────────────────────────────────────────────────────────────
+  function showToast(msg, type = 'ok') {
+    const t = document.createElement('div');
+    const bg = type === 'error' ? 'var(--coral)' : type === 'warn' ? 'var(--amber)' : 'var(--teal)';
+    Object.assign(t.style, {
+      position: 'fixed', bottom: '24px', right: '24px',
+      background: bg, color: '#fff',
+      padding: '10px 18px', borderRadius: '8px',
+      fontSize: '.88rem', fontFamily: 'var(--sans)',
+      fontWeight: '500', zIndex: '9999',
+      boxShadow: '0 4px 20px rgba(0,0,0,.25)',
+      animation: 'fadeIn .3s ease',
+      maxWidth: '340px',
+    });
+    t.textContent = msg;
+    document.body.appendChild(t);
+    setTimeout(() => t.remove(), 3500);
+  }
+
+
+  // ── Provider switcher ──────────────────────────────────────────────────
+  const PROVIDER_LABELS = {
+    github_models: { icon: '🐙', label: 'GitHub Models',  sub: 'models.github.ai · free tier' },
+    foundry_local: { icon: '💻', label: 'Foundry Local',  sub: 'on-device · no cloud needed' },
+    azure_openai:  { icon: '☁️', label: 'Azure OpenAI',   sub: 'cloud · enterprise' },
+    openai:        { icon: '🤖', label: 'OpenAI',          sub: 'api.openai.com' },
+  };
+
+  let _providerPanelOpen = false;
+
+  function toggleProviderPanel() {
+    const panel = document.getElementById('providerPanel');
+    _providerPanelOpen = !_providerPanelOpen;
+    panel.style.display = _providerPanelOpen ? 'block' : 'none';
+    if (_providerPanelOpen) loadProviderList();
+  }
+
+  document.addEventListener('click', e => {
+    if (_providerPanelOpen &&
+        !e.target.closest('#providerPanel') &&
+        !e.target.closest('#providerBadge')) {
+      document.getElementById('providerPanel').style.display = 'none';
+      _providerPanelOpen = false;
+    }
+  });
+
+  async function loadProviderList() {
+    try {
+      const r = await fetch(`${API}/api/provider`);
+      const data = await r.json();
+      const active = data.active.provider;
+
+      updateProviderBadge(active);
+
+      const list = document.getElementById('providerList');
+      list.innerHTML = data.available_providers.map(p => {
+        const meta = PROVIDER_LABELS[p.id] || { icon: '⚙️', label: p.id, sub: '' };
+        const isActive = p.id === active;
+        return `
+          <div onclick="switchProvider('${p.id}')" style="
+            display:flex; align-items:center; gap:10px; padding:8px 10px;
+            border-radius:8px; cursor:pointer;
+            background:${isActive ? 'rgba(37,176,157,.2)' : 'rgba(255,255,255,.04)'};
+            border:1px solid ${isActive ? 'rgba(37,176,157,.4)' : 'rgba(255,255,255,.08)'};
+            transition:background .15s;
+          " onmouseover="this.style.background='rgba(255,255,255,.08)'"
+             onmouseout="this.style.background='${isActive ? 'rgba(37,176,157,.2)' : 'rgba(255,255,255,.04)'}'">
+            <span style="font-size:1.2rem;">${meta.icon}</span>
+            <div style="flex:1;">
+              <div style="font-size:.85rem; font-weight:600;">${meta.label}
+                ${p.local ? '<span style="font-size:.65rem;background:rgba(37,176,157,.25);color:#25b09d;padding:1px 6px;border-radius:4px;margin-left:4px;">LOCAL</span>' : ''}
+              </div>
+              <div style="font-size:.7rem; color:rgba(255,255,255,.45); font-family:var(--mono);">${meta.sub}</div>
+            </div>
+            ${isActive ? '<span style="color:#25b09d; font-size:.8rem;">✓ active</span>' : ''}
+          </div>`;
+      }).join('');
+    } catch (err) {
+      console.warn('Could not load providers:', err);
+    }
+  }
+
+  function updateProviderBadge(providerId) {
+    const meta = PROVIDER_LABELS[providerId] || { icon: '⚙️', label: providerId };
+    const badge = document.getElementById('providerBadge');
+    badge.textContent = `${meta.icon} ${meta.label}`;
+    badge.title = `Active provider: ${meta.label} — click to switch`;
+  }
+
+  async function switchProvider(providerId) {
+    try {
+      const r = await fetch(`${API}/api/provider/switch`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ provider: providerId }),
+      });
+      if (!r.ok) throw new Error((await r.json()).detail);
+      const data = await r.json();
+      updateProviderBadge(data.active.provider);
+      await loadProviderList();
+      showToast(`✅ Switched to ${PROVIDER_LABELS[providerId]?.label || providerId}`);
+      document.getElementById('providerPanel').style.display = 'none';
+      _providerPanelOpen = false;
+    } catch (err) {
+      showToast(`❌ Provider switch failed: ${err.message}`, 'error');
+    }
+  }
+
+  // Load provider on init
+  async function initProvider() {
+    try {
+      const r = await fetch(`${API}/api/provider`);
+      const data = await r.json();
+      updateProviderBadge(data.active.provider);
+    } catch { /* offline */ }
+  }
+
+  // ── Init ───────────────────────────────────────────────────────────────
+  initProvider();
+  checkHealth();
+  setInterval(checkHealth, 30000);
+</script>
+</body>
+</html>

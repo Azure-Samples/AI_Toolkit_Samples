@@ -1,0 +1,93 @@
+Introduction to Machine Learning
+===================================
+
+Chapter 1: Foundations of Machine Learning
+-------------------------------------------
+
+Machine learning (ML) is a subset of artificial intelligence that enables computers to learn from experience without being explicitly programmed. Rather than following a rigid set of rules, ML systems identify patterns in data and make decisions with minimal human intervention.
+
+Types of Machine Learning:
+
+1. Supervised Learning
+   In supervised learning, the model is trained on labeled data — input-output pairs where the correct answer is known. The algorithm learns a mapping from inputs (features) to outputs (labels). Common examples include:
+   - Classification: predicting categories (e.g., spam/not-spam email detection)
+   - Regression: predicting continuous values (e.g., house price prediction)
+   Popular algorithms: Linear Regression, Decision Trees, Support Vector Machines (SVM), Neural Networks.
+
+2. Unsupervised Learning
+   Unsupervised learning works with unlabeled data. The algorithm discovers hidden structure or patterns without guidance. Common tasks include:
+   - Clustering: grouping similar data points (e.g., customer segmentation using K-Means)
+   - Dimensionality Reduction: simplifying data while preserving information (e.g., PCA, t-SNE)
+   - Anomaly Detection: identifying unusual patterns.
+
+3. Reinforcement Learning
+   An agent learns by interacting with an environment, receiving rewards for good actions and penalties for bad ones. Used in robotics, game playing (AlphaGo), and autonomous systems.
+
+Chapter 2: Core Concepts
+--------------------------
+
+Gradient Descent
+Gradient descent is the most widely used optimization algorithm in ML. It iteratively adjusts model parameters (weights) by moving in the direction of steepest descent of the loss function. The update rule is:
+   θ = θ - α * ∇L(θ)
+where α is the learning rate and ∇L is the gradient of the loss.
+
+Variants of Gradient Descent:
+- Batch Gradient Descent: uses the entire dataset per update — accurate but slow.
+- Stochastic Gradient Descent (SGD): uses one sample per update — fast but noisy.
+- Mini-Batch Gradient Descent: compromise between batch and stochastic — most common in practice.
+
+Overfitting and Underfitting
+- Overfitting: model memorises training data but fails to generalise (high variance). Signs: low training loss, high test loss.
+- Underfitting: model is too simple to capture patterns (high bias). Signs: high training and test loss.
+Solutions include: regularisation (L1/L2), dropout (neural networks), cross-validation, more data.
+
+Bias-Variance Tradeoff
+Every ML model faces a fundamental tradeoff:
+- High bias → underfitting (model too simple)
+- High variance → overfitting (model too complex)
+The optimal model minimises total error = bias² + variance + irreducible noise.
+
+Chapter 3: Neural Networks
+----------------------------
+
+A neural network consists of layers of interconnected nodes (neurons). Each neuron applies a weighted sum followed by a non-linear activation function.
+
+Common Activation Functions:
+- ReLU (Rectified Linear Unit): f(x) = max(0, x) — most popular, avoids vanishing gradient.
+- Sigmoid: f(x) = 1/(1+e^-x) — used in output for binary classification.
+- Softmax: normalises outputs to probability distribution — used for multi-class classification.
+- Tanh: f(x) = (e^x - e^-x)/(e^x + e^-x) — zero-centred, often better than sigmoid.
+
+Backpropagation
+The algorithm for training neural networks. It computes the gradient of the loss with respect to each weight using the chain rule, then uses gradient descent to update weights.
+
+Vanishing Gradient Problem
+In deep networks, gradients can shrink exponentially as they propagate backward. This makes early layers learn very slowly. Solutions: ReLU activation, batch normalisation, residual connections (ResNets), gradient clipping.
+
+Chapter 4: Retrieval-Augmented Generation (RAG)
+-------------------------------------------------
+
+RAG combines information retrieval with large language models to produce grounded, accurate responses. Instead of relying solely on the LLM's parametric knowledge (which can be stale or hallucinated), RAG retrieves relevant documents and conditions the LLM response on them.
+
+RAG Pipeline Steps:
+1. Ingestion: documents are chunked, embedded (converted to dense vectors), and stored in a vector database.
+2. Retrieval: at query time, the query is embedded and a similarity search finds the most relevant chunks.
+3. Augmentation: retrieved chunks are injected into the LLM prompt as context.
+4. Generation: the LLM generates a response grounded in the retrieved evidence.
+
+Benefits: reduces hallucination, allows the model to cite sources, enables domain-specific Q&A without retraining.
+
+Chapter 5: AI Observability
+-----------------------------
+
+Observability in AI systems means having full visibility into every step of an agent's reasoning and execution. This is crucial for debugging, performance tuning, and governance.
+
+OpenTelemetry (OTel) is the industry standard for telemetry data (traces, metrics, logs). For AI agents, OTel emits:
+- Spans: units of work with start/end times and attributes. Key spans:
+  * invoke_agent: top-level span for each agent call
+  * chat: LLM call with prompt/response details
+  * execute_tool: function/tool call with arguments and result
+- Metrics: counters (queries/second), histograms (latency distribution), gauges (token usage).
+- Logs: structured events correlated to traces via trace context.
+
+Microsoft Agent Framework has built-in OTel integration following GenAI Semantic Conventions, making observability a first-class feature rather than an afterthought.
