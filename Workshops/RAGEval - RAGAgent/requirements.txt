@@ -1,0 +1,19 @@
+# ── Web framework ─────────────────────────────────────────────────
+fastapi==0.115.0
+uvicorn[standard]==0.32.0
+python-multipart==0.0.12
+
+# ── File parsing (PDF / DOCX / TXT) ──────────────────────────────
+pypdf==4.3.1
+python-docx==1.1.2
+
+# ── LLM inference ─────────────────────────────────────────────────
+openai==1.109.1
+
+# ── RAGAS evaluation ──────────────────────────────────────────────
+ragas==0.2.15
+langchain-openai==0.2.14
+datasets==3.1.0
+
+# ── Utilities ─────────────────────────────────────────────────────
+python-dotenv==1.0.1

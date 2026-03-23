@@ -1,0 +1,50 @@
+[
+  {
+    "id": "test_001",
+    "question": "How many days do I have to return a product?",
+    "ground_truth": "You have 30 days from purchase to return any item for a full refund, except electronics which must be returned within 15 days.",
+    "category": "returns"
+  },
+  {
+    "id": "test_002",
+    "question": "What payment methods do you accept?",
+    "ground_truth": "We accept Visa, Mastercard, American Express, Discover, PayPal, Apple Pay, Google Pay, Shop Pay, and Buy Now Pay Later options via Klarna and Afterpay.",
+    "category": "payment"
+  },
+  {
+    "id": "test_003",
+    "question": "How long does standard shipping take?",
+    "ground_truth": "Standard shipping takes 5-7 business days and is free on orders over $50.",
+    "category": "shipping"
+  },
+  {
+    "id": "test_004",
+    "question": "Can I cancel my order after placing it?",
+    "ground_truth": "You can cancel within 1 hour of placement. After that, orders enter processing and cannot be modified or cancelled.",
+    "category": "orders"
+  },
+  {
+    "id": "test_005",
+    "question": "What does the warranty cover for electronics?",
+    "ground_truth": "Electronics come with a 1-year manufacturer warranty covering defects in materials and workmanship. Physical damage, water damage, and normal wear are not covered.",
+    "category": "warranty"
+  },
+  {
+    "id": "test_006",
+    "question": "How do I earn and redeem loyalty points?",
+    "ground_truth": "You earn 1 point per dollar spent. Points can be redeemed at $1 value per 100 points. Gold members (2000+ points) get 10% cashback and free overnight shipping.",
+    "category": "loyalty"
+  },
+  {
+    "id": "test_007",
+    "question": "Can I use multiple promo codes on one order?",
+    "ground_truth": "Only one promo code can be applied per order. Codes cannot be combined with other offers unless explicitly stated.",
+    "category": "discounts"
+  },
+  {
+    "id": "test_008",
+    "question": "What is the refund processing time?",
+    "ground_truth": "Refunds are processed within 5-7 business days after the returned item is received.",
+    "category": "returns"
+  }
+]
