@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ShopEval — CustomerBot Evaluator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg:       #f5f3ef;
+      --surface:  #ffffff;
+      --border:   #e2ddd6;
+      --text:     #1a1814;
+      --muted:    #8a8278;
+      --ink:      #2d2a26;
+      --amber:    #d97706;
+      --amber-bg: #fef3c7;
+      --green:    #15803d;
+      --green-bg: #dcfce7;
+      --red:      #b91c1c;
+      --red-bg:   #fee2e2;
+      --blue:     #1d4ed8;
+      --blue-bg:  #dbeafe;
+      --purple:   #7c3aed;
+      --purple-bg:#ede9fe;
+      --shadow:   0 1px 3px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.06);
+      --shadow-lg:0 8px 32px rgba(0,0,0,0.1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      height: 58px;
+      display: flex; align-items: center; justify-content: space-between;
+      position: sticky; top: 0; z-index: 100;
+      box-shadow: 0 1px 0 var(--border);
+    }
+    .logo {
+      display: flex; align-items: center; gap: 10px;
+      font-weight: 700; font-size: 1rem; letter-spacing: -0.02em;
+    }
+    .logo-mark {
+      width: 30px; height: 30px;
+      background: var(--ink); border-radius: 8px;
+      display: grid; place-items: center;
+      color: #fff; font-size: 0.85rem;
+    }
+
+    /* ── TAB NAV ── */
+    .tab-bar {
+      display: flex; gap: 2px;
+      background: #eee9e0;
+      border-radius: 10px;
+      padding: 3px;
+    }
+    .tab {
+      padding: 7px 20px; border-radius: 8px;
+      font-size: 0.82rem; font-weight: 600;
+      cursor: pointer; border: none; background: transparent;
+      color: var(--muted); transition: all 0.15s;
+      display: flex; align-items: center; gap: 7px;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .tab.active {
+      background: var(--surface);
+      color: var(--text);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+    }
+    .tab-num {
+      width: 18px; height: 18px; border-radius: 50%;
+      background: var(--border); font-size: 0.65rem;
+      display: grid; place-items: center; font-weight: 700;
+      transition: all 0.15s;
+    }
+    .tab.active .tab-num { background: var(--ink); color: #fff; }
+
+    .api-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: #ccc; transition: all 0.3s;
+    }
+    .api-dot.on  { background: var(--green); box-shadow: 0 0 6px var(--green); }
+    .api-dot.off { background: var(--red); }
+
+    /* ── SCREENS ── */
+    .screen { display: none; max-width: 900px; margin: 0 auto; padding: 2.5rem 2rem; }
+    .screen.active { display: block; animation: rise 0.25s ease; }
+    @keyframes rise { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:none} }
+
+    .screen-title {
+      font-size: 1.5rem; font-weight: 700; letter-spacing: -0.03em; margin-bottom: 0.3rem;
+    }
+    .screen-sub {
+      color: var(--muted); font-size: 0.875rem; margin-bottom: 2rem;
+      font-family: 'DM Mono', monospace;
+    }
+
+    /* ── CARD ── */
+    .card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 14px; box-shadow: var(--shadow); padding: 1.5rem;
+    }
+
+    /* ── ASK BOX ── */
+    .ask-box {
+      background: var(--surface); border: 1.5px solid var(--border);
+      border-radius: 14px; box-shadow: var(--shadow);
+      overflow: hidden; margin-bottom: 1.25rem; transition: border-color 0.2s;
+    }
+    .ask-box:focus-within { border-color: var(--amber); }
+    .ask-input {
+      width: 100%; padding: 1.1rem 1.25rem;
+      font-family: 'DM Sans', sans-serif; font-size: 1rem;
+      border: none; outline: none; background: transparent;
+      color: var(--text); resize: none;
+    }
+    .ask-input::placeholder { color: #bbb; }
+    .ask-footer {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.6rem 1rem 0.75rem; border-top: 1px solid var(--border);
+    }
+    .ask-hint { font-size: 0.75rem; color: var(--muted); font-family: 'DM Mono', monospace; }
+
+    .btn-primary {
+      background: var(--ink); color: #fff; border: none; border-radius: 9px;
+      padding: 9px 22px; font-family: 'DM Sans', sans-serif;
+      font-size: 0.875rem; font-weight: 600; cursor: pointer; transition: all 0.15s;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .btn-primary:hover { background: #3d3a36; transform: translateY(-1px); }
+    .btn-primary:active { transform: none; }
+    .btn-primary:disabled { opacity: 0.4; pointer-events: none; }
+
+    /* Quick questions */
+    .ql { font-size: 0.72rem; font-family: 'DM Mono', monospace; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.6rem; }
+    .quick-pills { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2rem; }
+    .qp {
+      padding: 6px 14px; border-radius: 100px; border: 1px solid var(--border);
+      background: var(--surface); font-size: 0.78rem; cursor: pointer; color: var(--ink);
+      transition: all 0.15s; font-family: 'DM Sans', sans-serif;
+    }
+    .qp:hover { border-color: var(--amber); background: var(--amber-bg); color: var(--amber); }
+
+    /* ── ANSWER AREA ── */
+    #answer-area { display: none; }
+
+    .answer-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 14px; box-shadow: var(--shadow); overflow: hidden; margin-bottom: 1rem;
+    }
+    .answer-label {
+      padding: 0.7rem 1.25rem; border-bottom: 1px solid var(--border);
+      font-size: 0.7rem; font-family: 'DM Mono', monospace;
+      text-transform: uppercase; letter-spacing: 0.1em;
+      color: var(--muted); background: #faf9f7;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .answer-body { padding: 1.25rem; font-size: 0.93rem; line-height: 1.7; min-height: 60px; }
+
+    .cursor {
+      display: inline-block; width: 2px; height: 1em;
+      background: var(--amber); margin-left: 2px;
+      animation: blink 0.9s ease infinite; vertical-align: text-bottom;
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+    /* ── SCORES ── */
+    #scores-area { display: none; animation: rise 0.4s ease; }
+
+    .scores-grid {
+      display: grid; grid-template-columns: repeat(4,1fr); gap: 0.75rem; margin-bottom: 1rem;
+    }
+    .score-tile {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1rem; text-align: center;
+      box-shadow: var(--shadow); position: relative; overflow: hidden;
+    }
+    .score-tile::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0;
+      height: 3px; border-radius: 12px 12px 0 0;
+    }
+    .tile-faith::before  { background: var(--green); }
+    .tile-relev::before  { background: var(--blue); }
+    .tile-prec::before   { background: var(--amber); }
+    .tile-recl::before   { background: var(--purple); }
+
+    .score-name {
+      font-size: 0.65rem; font-family: 'DM Mono', monospace;
+      text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 0.6rem;
+    }
+    .score-val {
+      font-size: 2rem; font-weight: 700; font-family: 'DM Mono', monospace;
+      letter-spacing: -0.04em; line-height: 1; margin-bottom: 0.5rem;
+      opacity: 0; transform: scale(0.7);
+      transition: all 0.5s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    .score-val.show { opacity:1; transform:scale(1); }
+    .score-bar-wrap { height: 4px; background: var(--border); border-radius: 100px; overflow: hidden; }
+    .score-bar { height: 100%; border-radius: 100px; width: 0%; transition: width 1s cubic-bezier(0.16,1,0.3,1); }
+    .tile-faith .score-val,.tile-faith .score-bar { color:var(--green); background:var(--green); }
+    .tile-relev .score-val,.tile-relev .score-bar { color:var(--blue);  background:var(--blue); }
+    .tile-prec  .score-val,.tile-prec  .score-bar { color:var(--amber); background:var(--amber); }
+    .tile-recl  .score-val,.tile-recl  .score-bar { color:var(--purple);background:var(--purple); }
+    .score-desc { font-size: 0.68rem; color: var(--muted); margin-top: 0.4rem; line-height: 1.4; }
+
+    .verdict-row {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1rem 1.5rem;
+      display: flex; align-items: center; justify-content: space-between;
+      box-shadow: var(--shadow); margin-bottom: 1rem;
+    }
+    .verdict-left { display: flex; align-items: center; gap: 1.25rem; }
+    .ragas-lbl { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); font-family: 'DM Mono', monospace; }
+    .ragas-val {
+      font-size: 2.2rem; font-weight: 700; letter-spacing: -0.04em; line-height: 1;
+      font-family: 'DM Mono', monospace; opacity:0; transition: opacity 0.5s 0.3s;
+    }
+    .ragas-val.show { opacity:1; }
+    .pass-badge {
+      padding: 6px 18px; border-radius: 100px; font-size: 0.8rem; font-weight: 700;
+      font-family: 'DM Mono', monospace; letter-spacing: 0.05em;
+      opacity:0; transform:translateY(6px); transition: all 0.4s 0.5s;
+    }
+    .pass-badge.show { opacity:1; transform:none; }
+    .pass-badge.pass { background:var(--green-bg); color:var(--green); border:1px solid #86efac; }
+    .pass-badge.fail { background:var(--red-bg);   color:var(--red);   border:1px solid #fca5a5; }
+    .verdict-hint { font-size: 0.75rem; color: var(--muted); text-align: right; font-family: 'DM Mono', monospace; line-height: 1.6; }
+
+    /* chunks */
+    .chunks-title { font-size: 0.7rem; font-family: 'DM Mono', monospace; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 0.75rem; }
+    .chunk-row { background: #faf9f7; border: 1px solid var(--border); border-radius: 10px; margin-bottom: 0.5rem; overflow: hidden; }
+    .chunk-head { display: flex; align-items: center; justify-content: space-between; padding: 8px 12px; }
+    .chunk-doc { font-weight: 600; font-size: 0.8rem; }
+    .chunk-pill { font-family: 'DM Mono', monospace; font-size: 0.68rem; padding: 2px 8px; border-radius: 100px; background: var(--amber-bg); color: var(--amber); border: 1px solid #fcd34d; }
+    .chunk-bar { height: 2px; background: linear-gradient(90deg, var(--amber), transparent); transition: width 0.8s ease; }
+    .chunk-text { padding: 8px 12px 10px; font-size: 0.78rem; color: var(--muted); line-height: 1.6; border-top: 1px solid var(--border); }
+
+    /* ── SCREEN 2 ── */
+    .eval-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+    .clabel { font-size: 0.68rem; font-family: 'DM Mono', monospace; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 0.5rem; display: flex; align-items: center; gap: 6px; }
+    .cdot { width: 7px; height: 7px; border-radius: 50%; }
+    .ctext { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 1rem; font-size: 0.85rem; line-height: 1.7; color: var(--ink); min-height: 90px; }
+    .ctext.bot  { border-color: #93c5fd; background: #f0f7ff; }
+    .ctext.gt   { border-color: #86efac; background: #f0fdf4; }
+
+    .mtable { width: 100%; border-collapse: collapse; }
+    .mtable th { text-align: left; font-size: 0.68rem; font-family: 'DM Mono', monospace; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); padding: 0 0.75rem 0.75rem; border-bottom: 1px solid var(--border); }
+    .mtable td { padding: 0.65rem 0.75rem; font-size: 0.82rem; border-bottom: 1px solid #f0ece6; }
+    .mtable tr:last-child td { border-bottom: none; }
+    .mpill { display: inline-block; padding: 2px 10px; border-radius: 100px; font-family: 'DM Mono', monospace; font-size: 0.75rem; font-weight: 600; }
+    .ibar { height: 6px; border-radius: 100px; background: var(--border); width: 120px; overflow: hidden; display: inline-block; vertical-align: middle; margin-left: 8px; }
+    .ifill { height: 100%; border-radius: 100px; }
+
+    /* ── SCREEN 3 ── */
+    .run-bar { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+    .summary-strip { display: flex; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; box-shadow: var(--shadow); margin-bottom: 1.5rem; }
+    .sstat { flex:1; padding: 1rem; text-align: center; border-right: 1px solid var(--border); }
+    .sstat:last-child { border-right: none; }
+    .sval { font-size: 1.8rem; font-weight: 700; font-family: 'DM Mono', monospace; letter-spacing: -0.04em; line-height: 1; margin-bottom: 3px; }
+    .slbl { font-size: 0.65rem; font-family: 'DM Mono', monospace; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }
+
+    .prog-wrap { margin: 0 0 1.5rem; }
+    .prog-label { display: flex; justify-content: space-between; font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--muted); margin-bottom: 0.4rem; }
+    .prog-track { height: 5px; background: var(--border); border-radius: 100px; overflow: hidden; }
+    .prog-fill { height: 100%; width: 0%; border-radius: 100px; background: linear-gradient(90deg, var(--amber), var(--green)); transition: width 0.3s ease; }
+
+    .rrow {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; margin-bottom: 0.75rem; overflow: hidden;
+      box-shadow: var(--shadow); cursor: pointer;
+      opacity:0; transform: translateY(6px);
+      transition: opacity 0.3s, transform 0.3s, box-shadow 0.15s;
+    }
+    .rrow.vis { opacity:1; transform:none; }
+    .rrow:hover { box-shadow: var(--shadow-lg); }
+    .rhead { padding: 0.9rem 1.25rem; display: flex; align-items: center; gap: 1rem; }
+    .rnum { font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--muted); white-space: nowrap; }
+    .rq { flex:1; font-weight: 600; font-size: 0.875rem; }
+    .rscore { font-family: 'DM Mono', monospace; font-size: 0.9rem; font-weight: 700; }
+    .rbody { display: none; padding: 0 1.25rem 1.25rem; }
+    .rbody.open { display: block; animation: rise 0.2s ease; }
+
+    /* empty */
+    .empty { text-align: center; padding: 3.5rem 2rem; color: var(--muted); }
+    .empty-icon { font-size: 2.5rem; margin-bottom: 0.75rem; }
+    .empty-title { font-weight: 700; font-size: 1rem; color: var(--ink); margin-bottom: 0.4rem; }
+    .empty-sub { font-size: 0.85rem; line-height: 1.6; }
+
+    /* loading dots */
+    .ldots span { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--amber); margin: 0 2px; animation: db 1.2s ease infinite; }
+    .ldots span:nth-child(2){animation-delay:.15s}.ldots span:nth-child(3){animation-delay:.3s}
+    @keyframes db{0%,80%,100%{transform:scale(.7);opacity:.4}40%{transform:scale(1);opacity:1}}
+
+    @media(max-width:640px){
+      .scores-grid{grid-template-columns:repeat(2,1fr);}
+      .eval-grid{grid-template-columns:1fr;}
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="logo">
+    <div class="logo-mark">🛍</div>
+    ShopEval
+    <span style="font-weight:300;color:var(--muted);margin-left:2px">/ CustomerBot</span>
+  </div>
+  <div class="tab-bar">
+    <button class="tab active" onclick="go('ask',this)"><span class="tab-num">1</span> Ask</button>
+    <button class="tab"        onclick="go('evaluate',this)"><span class="tab-num">2</span> Evaluate</button>
+    <button class="tab"        onclick="go('results',this)"><span class="tab-num">3</span> Results</button>
+  </div>
+  <div style="display:flex;align-items:center;gap:8px">
+    <div class="api-dot" id="api-dot"></div>
+    <span style="font-family:'DM Mono',monospace;font-size:0.7rem;color:var(--muted)" id="api-lbl">connecting…</span>
+  </div>
+</header>
+
+<!-- ══ SCREEN 1 — ASK ══════════════════════════════════════════ -->
+<div class="screen active" id="screen-ask">
+  <div class="screen-title">Ask the CustomerBot</div>
+  <div class="screen-sub">Type a question → answer streams in → RAGAS scores animate below</div>
+
+  <div class="ask-box">
+    <textarea class="ask-input" id="ask-input" rows="2"
+      placeholder="e.g. What is your return policy?"
+      onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();doAsk();}"></textarea>
+    <div class="ask-footer">
+      <span class="ask-hint">↵ Enter to send</span>
+      <button class="btn-primary" id="ask-btn" onclick="doAsk()">Ask CustomerBot →</button>
+    </div>
+  </div>
+
+  <div class="ql">Try these</div>
+  <div class="quick-pills" id="quick-pills"></div>
+
+  <div id="answer-area">
+    <div class="answer-card">
+      <div class="answer-label">
+        <span>🤖 CustomerBot Answer</span>
+        <span class="ldots" id="ans-loading"><span></span><span></span><span></span></span>
+      </div>
+      <div class="answer-body" id="ans-text"></div>
+    </div>
+
+    <div id="scores-area">
+      <div class="scores-grid">
+        <div class="score-tile tile-faith">
+          <div class="score-name">Faithfulness</div>
+          <div class="score-val" id="sv-faith">0%</div>
+          <div class="score-bar-wrap"><div class="score-bar" id="sb-faith"></div></div>
+          <div class="score-desc">Answer stays within retrieved context</div>
+        </div>
+        <div class="score-tile tile-relev">
+          <div class="score-name">Answer Relevancy</div>
+          <div class="score-val" id="sv-relev">0%</div>
+          <div class="score-bar-wrap"><div class="score-bar" id="sb-relev"></div></div>
+          <div class="score-desc">Answer addresses the question asked</div>
+        </div>
+        <div class="score-tile tile-prec">
+          <div class="score-name">Context Precision</div>
+          <div class="score-val" id="sv-prec">0%</div>
+          <div class="score-bar-wrap"><div class="score-bar" id="sb-prec"></div></div>
+          <div class="score-desc">Retrieved chunks were relevant</div>
+        </div>
+        <div class="score-tile tile-recl">
+          <div class="score-name">Context Recall</div>
+          <div class="score-val" id="sv-recl">0%</div>
+          <div class="score-bar-wrap"><div class="score-bar" id="sb-recl"></div></div>
+          <div class="score-desc">All needed info was retrieved</div>
+        </div>
+      </div>
+
+      <div class="verdict-row">
+        <div class="verdict-left">
+          <div>
+            <div class="ragas-lbl">RAGAS Score</div>
+            <div class="ragas-val" id="ragas-overall">—</div>
+          </div>
+          <div class="pass-badge" id="pass-badge">—</div>
+        </div>
+        <div class="verdict-hint">Threshold: 0.70 · top-k: 3 chunks<br/><span style="color:#ccc">RAGAS framework</span></div>
+      </div>
+
+      <div class="card">
+        <div class="chunks-title">📦 Retrieved Chunks — what the bot used to answer</div>
+        <div id="chunks-list"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SCREEN 2 — EVALUATE ════════════════════════════════════ -->
+<div class="screen" id="screen-evaluate">
+  <div class="screen-title">Evaluate a Question</div>
+  <div class="screen-sub">Bot answer vs ground truth — full RAGAS metric breakdown</div>
+
+  <div style="display:flex;gap:0.75rem;margin-bottom:1.5rem;flex-wrap:wrap">
+    <select id="eval-select" style="flex:1;padding:10px 14px;border:1px solid var(--border);border-radius:10px;font-family:'DM Sans',sans-serif;font-size:0.875rem;background:var(--surface);color:var(--ink);outline:none;cursor:pointer">
+      <option value="">— Pick a test question —</option>
+    </select>
+    <button class="btn-primary" onclick="doEvaluate()">Evaluate →</button>
+  </div>
+
+  <div id="eval-result">
+    <div class="empty">
+      <div class="empty-icon">⚡</div>
+      <div class="empty-title">Select a question above</div>
+      <div class="empty-sub">Pick from the pre-loaded test set and click Evaluate to see the full RAGAS breakdown with side-by-side comparison.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SCREEN 3 — RESULTS ═════════════════════════════════════ -->
+<div class="screen" id="screen-results">
+  <div class="screen-title">Full Evaluation Suite</div>
+  <div class="screen-sub">Run all 8 test cases — watch results appear one by one</div>
+
+  <div class="run-bar">
+    <button class="btn-primary" id="run-btn" onclick="doRunSuite()">▶ &nbsp;Run All 8 Tests</button>
+    <span style="font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--muted)">pass threshold ≥ 0.70</span>
+  </div>
+
+  <div id="suite-progress" style="display:none">
+    <div class="prog-wrap">
+      <div class="prog-label">
+        <span id="prog-msg">Running…</span>
+        <span id="prog-pct">0 / 8</span>
+      </div>
+      <div class="prog-track"><div class="prog-fill" id="prog-fill"></div></div>
+    </div>
+  </div>
+
+  <div id="summary-strip" style="display:none" class="summary-strip">
+    <div class="sstat"><div class="sval" id="ss-total">—</div><div class="slbl">Tests</div></div>
+    <div class="sstat"><div class="sval" style="color:var(--green)" id="ss-pass">—</div><div class="slbl">Passed</div></div>
+    <div class="sstat"><div class="sval" style="color:var(--red)"   id="ss-fail">—</div><div class="slbl">Failed</div></div>
+    <div class="sstat"><div class="sval" style="color:var(--amber)" id="ss-rate">—</div><div class="slbl">Pass Rate</div></div>
+    <div class="sstat"><div class="sval" id="ss-ragas">—</div><div class="slbl">Avg RAGAS</div></div>
+  </div>
+
+  <div id="results-list">
+    <div class="empty">
+      <div class="empty-icon">📊</div>
+      <div class="empty-title">No results yet</div>
+      <div class="empty-sub">Click "Run All 8 Tests" to start the evaluation suite.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ JAVASCRIPT ══════════════════════════════════════════════ -->
+<script>
+const API = 'http://localhost:8000';
+
+// ── NAV ──────────────────────────────────────────────────────
+function go(id, btn) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('screen-' + id).classList.add('active');
+  btn.classList.add('active');
+}
+
+// ── API STATUS ───────────────────────────────────────────────
+async function ping() {
+  const dot = document.getElementById('api-dot');
+  const lbl = document.getElementById('api-lbl');
+  try {
+    await fetch(API + '/');
+    dot.className = 'api-dot on';
+    lbl.textContent = 'API ready';
+  } catch {
+    dot.className = 'api-dot off';
+    lbl.textContent = 'API offline';
+  }
+}
+ping(); setInterval(ping, 8000);
+
+// ── QUICK PILLS ──────────────────────────────────────────────
+['How do I return a product?','Do you accept PayPal?','How fast is standard shipping?',
+ 'Can I cancel my order?','What does the warranty cover?','How do I earn loyalty points?'
+].forEach(q => {
+  const b = document.createElement('button');
+  b.className = 'qp'; b.textContent = q;
+  b.onclick = () => { document.getElementById('ask-input').value = q; doAsk(); };
+  document.getElementById('quick-pills').appendChild(b);
+});
+
+// ── EVAL SELECT ──────────────────────────────────────────────
+async function loadTests() {
+  try {
+    const d = await (await fetch(API + '/test-dataset')).json();
+    const sel = document.getElementById('eval-select');
+    d.tests.forEach(t => {
+      const o = document.createElement('option');
+      o.value = t.id; o.textContent = t.question; sel.appendChild(o);
+    });
+  } catch {}
+}
+loadTests();
+
+// ── HELPERS ──────────────────────────────────────────────────
+const sc = v => v >= 0.80 ? 'var(--green)' : v >= 0.60 ? 'var(--amber)' : 'var(--red)';
+
+function typewriter(el, text, speed = 15) {
+  return new Promise(res => {
+    let i = 0; el.innerHTML = '';
+    const cur = document.createElement('span'); cur.className = 'cursor'; el.appendChild(cur);
+    const t = setInterval(() => {
+      el.insertBefore(document.createTextNode(text[i]), cur);
+      if (++i >= text.length) { clearInterval(t); cur.remove(); res(); }
+    }, speed);
+  });
+}
+
+function animateScores(m) {
+  [['faith','faithfulness'],['relev','answer_relevancy'],['prec','context_precision'],['recl','context_recall']]
+  .forEach(([k, key], i) => setTimeout(() => {
+    const v = m[key];
+    document.getElementById('sv-'+k).textContent = (v*100).toFixed(0)+'%';
+    document.getElementById('sv-'+k).classList.add('show');
+    document.getElementById('sb-'+k).style.width = (v*100)+'%';
+  }, i * 150));
+
+  setTimeout(() => {
+    const ov = document.getElementById('ragas-overall');
+    ov.textContent = (m.ragas_score*100).toFixed(0)+'%';
+    ov.style.color = sc(m.ragas_score);
+    ov.classList.add('show');
+    const b = document.getElementById('pass-badge');
+    const p = m.ragas_score >= 0.70;
+    b.textContent = p ? '✓ PASS' : '✗ FAIL';
+    b.className = 'pass-badge show ' + (p ? 'pass' : 'fail');
+  }, 700);
+}
+
+function chunkHTML(chunks) {
+  return chunks.map(c => `
+    <div class="chunk-row">
+      <div class="chunk-head">
+        <span class="chunk-doc">📄 ${c.title||c.id}</span>
+        <span class="chunk-pill">score ${c.relevance_score}</span>
+      </div>
+      <div class="chunk-bar" style="width:${Math.min(c.relevance_score*500,100)}%"></div>
+      <div class="chunk-text">${c.content.substring(0,180)}…</div>
+    </div>`).join('');
+}
+
+// ── SCREEN 1 ─────────────────────────────────────────────────
+async function doAsk() {
+  const q = document.getElementById('ask-input').value.trim();
+  if (!q) return;
+  document.getElementById('ask-btn').disabled = true;
+  document.getElementById('answer-area').style.display = 'block';
+  document.getElementById('scores-area').style.display = 'none';
+  document.getElementById('ans-loading').style.display = 'flex';
+  document.getElementById('ans-text').innerHTML = '';
+  // reset scores
+  ['faith','relev','prec','recl'].forEach(k => {
+    document.getElementById('sv-'+k).classList.remove('show');
+    document.getElementById('sb-'+k).style.width = '0%';
+  });
+  document.getElementById('ragas-overall').classList.remove('show');
+  document.getElementById('pass-badge').className = 'pass-badge';
+
+  try {
+    const d = await (await fetch(API+'/evaluate/single',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({question:q})})).json();
+    document.getElementById('ans-loading').style.display = 'none';
+    await typewriter(document.getElementById('ans-text'), d.answer, 14);
+    document.getElementById('scores-area').style.display = 'block';
+    await new Promise(r => setTimeout(r, 200));
+    animateScores(d.metrics);
+    document.getElementById('chunks-list').innerHTML = chunkHTML(d.retrieved_chunks);
+  } catch {
+    document.getElementById('ans-loading').style.display = 'none';
+    document.getElementById('ans-text').textContent = '❌ API offline — start the FastAPI server on port 8000.';
+  }
+  document.getElementById('ask-btn').disabled = false;
+}
+
+// ── SCREEN 2 ─────────────────────────────────────────────────
+const MDESC = {
+  faithfulness:      'Every claim is grounded in retrieved context — no hallucination',
+  answer_relevancy:  'Answer directly addresses what was asked',
+  context_precision: 'Retrieved chunks were relevant, not noisy',
+  context_recall:    'All information needed to answer was retrieved',
+};
+
+async function doEvaluate() {
+  const sel = document.getElementById('eval-select');
+  if (!sel.value) return;
+  const question = sel.options[sel.selectedIndex].textContent;
+  const el = document.getElementById('eval-result');
+  el.innerHTML = `<div class="empty"><div class="ldots"><span></span><span></span><span></span></div><div style="margin-top:1rem;color:var(--muted);font-size:0.85rem">Evaluating…</div></div>`;
+
+  try {
+    const d = await (await fetch(API+'/evaluate/single',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({question})})).json();
+    const m = d.metrics;
+    const rows = [
+      ['Faithfulness','faithfulness','var(--green)','var(--green-bg)'],
+      ['Answer Relevancy','answer_relevancy','var(--blue)','var(--blue-bg)'],
+      ['Context Precision','context_precision','var(--amber)','var(--amber-bg)'],
+      ['Context Recall','context_recall','var(--purple)','var(--purple-bg)'],
+    ];
+    el.innerHTML = `
+      <div class="eval-grid">
+        <div>
+          <div class="clabel"><div class="cdot" style="background:var(--blue)"></div>Bot Answer</div>
+          <div class="ctext bot">${d.answer}</div>
+        </div>
+        <div>
+          <div class="clabel"><div class="cdot" style="background:var(--green)"></div>Ground Truth</div>
+          <div class="ctext gt">${d.ground_truth||'<em style="color:var(--muted)">No ground truth</em>'}</div>
+        </div>
+      </div>
+      <div class="card" style="margin-bottom:1rem">
+        <table class="mtable">
+          <thead><tr><th>Metric</th><th>Score</th><th>Visual</th><th>What it measures</th></tr></thead>
+          <tbody>
+            ${rows.map(([name,key,color,bg]) => {
+              const v = m[key], pct = (v*100).toFixed(0);
+              return `<tr>
+                <td style="font-weight:600">${name}</td>
+                <td><span class="mpill" style="background:${bg};color:${color}">${pct}%</span></td>
+                <td><div class="ibar"><div class="ifill" style="width:${pct}%;background:${color}"></div></div></td>
+                <td style="color:var(--muted);font-size:0.78rem">${MDESC[key]}</td>
+              </tr>`;
+            }).join('')}
+          </tbody>
+        </table>
+      </div>
+      <div class="verdict-row">
+        <div class="verdict-left">
+          <div>
+            <div class="ragas-lbl">RAGAS Score</div>
+            <div class="ragas-val show" style="color:${sc(m.ragas_score)}">${(m.ragas_score*100).toFixed(0)}%</div>
+          </div>
+          <span class="pass-badge show ${d.passed?'pass':'fail'}">${d.passed?'✓ PASS':'✗ FAIL'}</span>
+        </div>
+        <div class="verdict-hint">threshold 0.70 · top-k 3 chunks</div>
+      </div>
+      <div class="card">
+        <div class="chunks-title">📦 Retrieved Chunks</div>
+        ${chunkHTML(d.retrieved_chunks)}
+      </div>`;
+  } catch {
+    el.innerHTML = `<div class="empty"><div class="empty-icon">❌</div><div class="empty-sub">API error — is the FastAPI server running?</div></div>`;
+  }
+}
+
+// ── SCREEN 3 ─────────────────────────────────────────────────
+async function doRunSuite() {
+  document.getElementById('run-btn').disabled = true;
+  document.getElementById('suite-progress').style.display = 'block';
+  document.getElementById('summary-strip').style.display = 'none';
+  document.getElementById('results-list').innerHTML = '';
+
+  const fill = document.getElementById('prog-fill');
+  const msg  = document.getElementById('prog-msg');
+  const pct  = document.getElementById('prog-pct');
+
+  let tests = [];
+  try {
+    tests = (await (await fetch(API+'/test-dataset')).json()).tests;
+  } catch {
+    document.getElementById('results-list').innerHTML = '<div class="empty"><div class="empty-icon">❌</div><div class="empty-sub">API offline</div></div>';
+    document.getElementById('run-btn').disabled = false;
+    return;
+  }
+
+  const results = [];
+  for (let i = 0; i < tests.length; i++) {
+    msg.textContent = `"${tests[i].question.substring(0,48)}…"`;
+    pct.textContent = `${i} / ${tests.length}`;
+    fill.style.width = ((i / tests.length) * 100) + '%';
+    try {
+      const d = await (await fetch(API+'/evaluate/single',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({question:tests[i].question})})).json();
+      results.push(d);
+      appendRow(d, i);
+    } catch {}
+    await new Promise(r => setTimeout(r, 200));
+  }
+
+  fill.style.width = '100%';
+  msg.textContent = 'Complete ✓';
+  pct.textContent = `${tests.length} / ${tests.length}`;
+
+  const passed = results.filter(r => r.passed).length;
+  const avg = results.reduce((a,r) => a + r.metrics.ragas_score, 0) / results.length;
+  document.getElementById('ss-total').textContent = results.length;
+  document.getElementById('ss-pass').textContent  = passed;
+  document.getElementById('ss-fail').textContent  = results.length - passed;
+  document.getElementById('ss-rate').textContent  = (passed/results.length*100).toFixed(0)+'%';
+  document.getElementById('ss-ragas').textContent = (avg*100).toFixed(0)+'%';
+  document.getElementById('ss-ragas').style.color = sc(avg);
+  document.getElementById('summary-strip').style.display = 'flex';
+  document.getElementById('run-btn').disabled = false;
+}
+
+function appendRow(d, idx) {
+  const list = document.getElementById('results-list');
+  const row = document.createElement('div');
+  row.className = 'rrow'; row.id = 'rr-'+idx;
+  row.innerHTML = `
+    <div class="rhead" onclick="toggleRow(${idx})">
+      <div class="rnum">#${String(idx+1).padStart(2,'0')}</div>
+      <div class="rq">${d.question}</div>
+      <div style="display:flex;align-items:center;gap:0.75rem">
+        <div class="rscore" style="color:${sc(d.metrics.ragas_score)}">${(d.metrics.ragas_score*100).toFixed(0)}%</div>
+        <span class="pass-badge show ${d.passed?'pass':'fail'}">${d.passed?'✓ PASS':'✗ FAIL'}</span>
+        <span style="color:var(--muted);font-size:0.8rem">▼</span>
+      </div>
+    </div>
+    <div class="rbody" id="rd-${idx}">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-bottom:1rem">
+        <div>
+          <div class="clabel"><div class="cdot" style="background:var(--blue)"></div>Bot Answer</div>
+          <div class="ctext bot">${d.answer}</div>
+        </div>
+        <div>
+          <div class="clabel"><div class="cdot" style="background:var(--green)"></div>Ground Truth</div>
+          <div class="ctext gt">${d.ground_truth||'<em style="color:var(--muted)">N/A</em>'}</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:1rem">
+        ${[['Faithfulness',d.metrics.faithfulness,'var(--green)','var(--green-bg)'],
+           ['Relevancy',d.metrics.answer_relevancy,'var(--blue)','var(--blue-bg)'],
+           ['Precision',d.metrics.context_precision,'var(--amber)','var(--amber-bg)'],
+           ['Recall',d.metrics.context_recall,'var(--purple)','var(--purple-bg)']
+          ].map(([n,v,c,bg]) => `
+          <div style="background:${bg};border-radius:8px;padding:8px 14px;text-align:center">
+            <div style="font-size:0.62rem;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:0.08em;color:${c};margin-bottom:2px">${n}</div>
+            <div style="font-size:1.1rem;font-weight:700;font-family:'DM Mono',monospace;color:${c}">${(v*100).toFixed(0)}%</div>
+          </div>`).join('')}
+      </div>
+      ${chunkHTML(d.retrieved_chunks)}
+    </div>`;
+  list.appendChild(row);
+  requestAnimationFrame(() => setTimeout(() => row.classList.add('vis'), 50));
+}
+
+function toggleRow(idx) {
+  document.getElementById('rd-'+idx).classList.toggle('open');
+}
+</script>
+</body>
+</html>

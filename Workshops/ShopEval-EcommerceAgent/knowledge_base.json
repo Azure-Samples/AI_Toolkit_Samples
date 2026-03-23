@@ -1,0 +1,42 @@
+[
+  {
+    "id": "doc_001",
+    "title": "Return Policy",
+    "content": "Our return policy allows customers to return any item within 30 days of purchase for a full refund. Items must be in original condition with tags attached. Electronics must be returned within 15 days. To initiate a return, visit our Returns Portal or contact support@shopbot.com. Refunds are processed within 5-7 business days after we receive the item. Sale items are final sale and cannot be returned unless defective."
+  },
+  {
+    "id": "doc_002",
+    "title": "Shipping Information",
+    "content": "We offer three shipping options: Standard (5-7 business days, free on orders over $50), Express (2-3 business days, $9.99), and Overnight (next business day, $19.99). International shipping is available to 45 countries with delivery in 10-14 business days. All orders over $150 qualify for free express shipping. Orders placed before 2 PM EST ship the same day. Tracking information is sent via email once the order ships."
+  },
+  {
+    "id": "doc_003",
+    "title": "Payment Methods",
+    "content": "We accept Visa, Mastercard, American Express, Discover, PayPal, Apple Pay, Google Pay, and Shop Pay. We also offer Buy Now Pay Later through Klarna and Afterpay — split your purchase into 4 interest-free payments. For security, all payments are processed through PCI-DSS compliant encryption. We do not store credit card details. Gift cards can be used at checkout by entering the code in the promo/gift card field."
+  },
+  {
+    "id": "doc_004",
+    "title": "Order Cancellation",
+    "content": "Orders can be cancelled within 1 hour of placement through My Orders page. After 1 hour, orders enter processing and cannot be modified. If you miss the cancellation window, you can refuse delivery and the item will be returned at no charge. Once the refund is initiated after a cancellation, it takes 3-5 business days to reflect on your card. Subscription orders can be cancelled anytime 48 hours before the next billing cycle."
+  },
+  {
+    "id": "doc_005",
+    "title": "Product Warranty",
+    "content": "All electronics come with a 1-year manufacturer warranty covering defects in materials and workmanship. Extended warranties of 2 or 3 years are available for purchase. Clothing and accessories carry a 90-day quality guarantee. Warranty claims must be submitted with proof of purchase. Physical damage, water damage, and normal wear-and-tear are not covered under warranty. For warranty service, contact warranty@shopbot.com with your order number and a description of the issue."
+  },
+  {
+    "id": "doc_006",
+    "title": "Customer Loyalty Program",
+    "content": "Our ShopRewards program lets you earn 1 point for every dollar spent. Bronze members (0-499 points) get standard benefits. Silver members (500-1999 points) get 5% cashback and free express shipping. Gold members (2000+ points) get 10% cashback, free overnight shipping, and early access to sales. Points expire after 12 months of inactivity. Points can be redeemed at $1 value per 100 points. Referrals earn you 200 bonus points per successful sign-up."
+  },
+  {
+    "id": "doc_007",
+    "title": "Account & Password",
+    "content": "To reset your password, click Forgot Password on the login page and enter your registered email. A reset link is valid for 24 hours. For two-factor authentication, go to Account Settings > Security. We support authenticator apps and SMS verification. If your account is locked after 5 failed login attempts, wait 30 minutes or contact support. To update your email address, verify the new email and complete identity verification. Account deletion requests are processed within 14 days per GDPR compliance."
+  },
+  {
+    "id": "doc_008",
+    "title": "Discount Codes and Promotions",
+    "content": "Promo codes can be applied at checkout in the Discount Code field. Only one promo code can be applied per order. Codes cannot be combined with other offers unless stated. Student discounts of 15% are available with a verified .edu email. Military discounts of 20% are available with ID.me verification. Seasonal sales happen during Black Friday, Cyber Monday, and Summer Sale. Newsletter subscribers get exclusive early access codes. Expired codes cannot be reinstated."
+  }
+]
