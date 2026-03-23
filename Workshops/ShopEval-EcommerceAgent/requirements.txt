@@ -6,7 +6,7 @@ uvicorn[standard]==0.32.0
 openai==1.109.1
 
 # ── RAGAS evaluation ──────────────────────────────────────────────
-ragas==0.2.15
+ragas==0.3.0rc2
 langchain-openai==0.2.14
 datasets==3.1.0
 
