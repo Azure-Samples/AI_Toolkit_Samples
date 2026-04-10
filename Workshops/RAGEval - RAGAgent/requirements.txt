@@ -4,7 +4,7 @@ uvicorn[standard]==0.32.0
 python-multipart==0.0.12
 
 # ── File parsing (PDF / DOCX / TXT) ──────────────────────────────
-pypdf==4.3.1
+pypdf==6.10.0
 python-docx==1.1.2
 
 # ── LLM inference ─────────────────────────────────────────────────
